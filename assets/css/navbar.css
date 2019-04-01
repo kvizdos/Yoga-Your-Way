@@ -1,0 +1,19 @@
+#navbar {
+    position: absolute;
+    bottom: 0;
+    z-index: 100;
+    width: 100vw;
+    height: 50px;
+    background-color: #F69F0C;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    color: white;
+    font-size: 18pt;
+}
+
+#navbar i {
+    margin-left: 12.5vw;
+    margin-right: 12.5vw;
+}
