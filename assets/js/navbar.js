@@ -1,19 +1,22 @@
 var Navbar = function(active) {
     this.active = active;
     this.pages = [],
-    this.addPage = (name, icon, onrender) => {
-        let newPage = new Page(name, icon, onrender);
+    this.addPage = (name, icon, showOnBar, onrender) => {
+        let newPage = new Page(name, icon, showOnBar, onrender);
         this.pages.push(newPage);
     }
     this.render = () => {
         let navList = "";
         for(page in this.pages) {
-            navList += "<i class='fas fa-"+this.pages[page].icon+"' onclick='navigateTo(`"+this.pages[page].selector+"`)'></i>"
+            if(this.pages[page].showOnBar) {
+                let classList = "fas fa-"+this.pages[page].icon+"";
+                
+                navList += "<i class='fas fa-"+this.pages[page].icon+"' onclick='navigateTo(`"+this.pages[page].selector+"`)'></i>"
+                
+            }
             this.pages[page].render();
         }
-        // <i class="fas fa-book-open"></i>
-        // <i class="fas fa-plus"></i>
-        // <i class="fas fa-cog"></i>        
+   
         $('body').append(`
         <div id="navbar">
             ${navList}
@@ -30,9 +33,10 @@ const navigateTo = (page) => {
 }
 
 
-var Page = function(name, icon, onrender) {
+var Page = function(name, icon, showOnBar, onrender) {
     this.name = name,
     this.icon = icon,
+    this.showOnBar = showOnBar,
     this.selector = 'page-' + this.name.toLowerCase(),
     this.id = Math.floor(Math.random() * 50),
     this.render = () => { 

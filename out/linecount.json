@@ -1,0 +1,83 @@
+{
+    "extension": "linecount",
+    "version": "0.1.7",
+    "workspace": "e:\\Kenton Vizdos\\Documents\\Yogapp",
+    "linecount": [
+        {
+            "version": "0.1.7",
+            "counttime": "2019-03-31 21:27:07",
+            "filesum": 11,
+            "codesum": 540,
+            "commentsum": 7,
+            "blanksum": 84,
+            "filelist": [
+                {
+                    "blank": 12,
+                    "code": 58,
+                    "comment": 0,
+                    "filename": "assets\\css\\main.1.css"
+                },
+                {
+                    "blank": 16,
+                    "code": 86,
+                    "comment": 0,
+                    "filename": "assets\\css\\main.css"
+                },
+                {
+                    "blank": 1,
+                    "code": 18,
+                    "comment": 0,
+                    "filename": "assets\\css\\navbar.css"
+                },
+                {
+                    "blank": 8,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "assets\\js\\main.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 40,
+                    "comment": 3,
+                    "filename": "assets\\js\\navbar.js"
+                },
+                {
+                    "blank": 11,
+                    "code": 74,
+                    "comment": 2,
+                    "filename": "assets\\js\\routines\\routineList.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "assets\\js\\routines\\Routines.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "assets\\js\\userSettings.js"
+                },
+                {
+                    "blank": 20,
+                    "code": 192,
+                    "comment": 0,
+                    "filename": "assets\\MaleFrontView.svg"
+                },
+                {
+                    "blank": 7,
+                    "code": 22,
+                    "comment": 0,
+                    "filename": "index.html"
+                },
+                {
+                    "blank": 5,
+                    "code": 16,
+                    "comment": 2,
+                    "filename": "styles.css"
+                }
+            ]
+        }
+    ]
+}

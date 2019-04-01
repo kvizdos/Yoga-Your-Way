@@ -13,7 +13,7 @@ body {
     display: flex;
     align-items: center;
 
-    width: 300vw;
+    width: 100vw;
     height: 100vh;
 
     transition: 250ms;
