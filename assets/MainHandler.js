@@ -32,11 +32,6 @@ window.onload = () => {
     loadingScreenContainer.appendChild(loadingScreen);
 
     document.getElementsByTagName('body')[0].appendChild(loadingScreenContainer);
-    // document.getElementsByTagName('body')[0].append(`
-    //     <div id="loadingScreen">
-    //         <h2>Loading..</h2>
-    //     </div>
-    // `)
 
     document.title = info['title'];
     var scripts = info['scripts'];
@@ -45,7 +40,6 @@ window.onload = () => {
 
 
     for(m in meta) {
-        // <meta name="description" content="">        
         let newMeta = document.createElement('meta');
         newMeta.name = meta[m].name;
         newMeta.content = meta[m].content;
@@ -53,18 +47,28 @@ window.onload = () => {
     }
 
     for(style in css) {
-        // rel="stylesheet" href="assets/css/main.css";
         let newCSS = document.createElement('link');
         newCSS.rel = "stylesheet";
         newCSS.href = css[style];
         document.querySelector('head').appendChild(newCSS);
     }
 
+    // Register SW & Manifest
+    let manifest = document.createElement('link');
+    manifest.rel = "manifest";
+    manifest.href = "/manifest.json";
+
+    let sw = document.createElement('script');
+    sw.src = "../sw-register.js";
+
+    document.getElementsByTagName('head')[0].appendChild(manifest);
+    document.getElementsByTagName('body')[0].appendChild(sw);
+
+
     for(script in scripts) {
         let newScript = document.createElement('script');
         newScript.src = scripts[script];
 
-        console.log(newScript.src);
         if(newScript.src.indexOf("assets/js/main.js") >= 0) {
             newScript.onload = () => {
                 Load();

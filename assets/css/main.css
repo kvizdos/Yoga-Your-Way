@@ -25,10 +25,13 @@ body {
     width: calc(100vw - 24px);
     float: left;
     height: 100%;
+    overflow: hidden;
+
 }
 
 .routine img {
     width: 100vw;
+    transition: 150ms;
 }
 
 .routineText {
@@ -40,7 +43,7 @@ body {
     
     position: absolute;
     bottom: 30vh;
-    width: 100%;
+    width: calc(100vw - 10px);;
 }
 
 .routineDescription {
@@ -50,7 +53,7 @@ body {
     bottom: 0;
     padding: 10px;
     height: calc(30vh - 20px);
-    width: 100vw;
+    width: calc(100vw - 20px);
     font-size: 14pt;
 }
 
@@ -98,5 +101,57 @@ body {
 }
 
 [id^="page-"] {
+    display: none;
+}
+
+.routineSwiper {
+    position: absolute;
+    bottom: 10px;
+    transition: 250ms;
+}
+
+.routineSplitRow {
+    width: calc(100vw - 20px);
+    display: block;
+    z-index: 50;
+}
+.routineSplit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+    width: calc(50vw - 20px);
+    float: left;
+    margin: 5px;
+    padding: 0px;
+    background-color: #F69F0C;
+    border-radius: 5px;
+    text-align: center;
+    height:  calc((30vh / 1.6));
+}
+
+.routineMsg {
+    text-align: center;
+    color: rgb(255, 213, 140);
+}
+
+.routineSplit i {
+    font-size: 24pt;
+    padding: 8px;
+}
+
+.routineSplit span {
+    margin: 15px;
+}
+
+.routineShowMore {
+    margin: 25px;
+    max-height: 55vh;
+    overflow: scroll;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #ffc019;
+    transition: 250ms;
     display: none;
 }

@@ -24,37 +24,114 @@ var routineList = function(container, prev, current, next) {
         localStorage.setItem('routines', JSON.stringify(this.routines));
     },
     this.render = () => {
-        $('.' + this.container).empty();
+        
         let pagination = "";
         for(let i = 0; i < this.routines.length; i++) {
             var classname = 'bubble';
             if(i == this.currentlyShowing) classname += " active";
             pagination += "<div class='"+classname+"'>&nbsp;</div>"
         }
-        $('.' + this.container).append(`  
-        <div class="routine">
-            <img src="assets/MaleFrontView.svg">
-            <div class="routineText">
-                <div class="pagination">
-                ${pagination}
-                </div>
-                <p class="routineHeader">${this.routines[this.currentlyShowing].name}</p>
-                <p class="routineDesc">${this.routines[this.currentlyShowing].description}</p>
-            </div>
-            <div class="routineDescription">
-            # of poses: ${this.routines[this.currentlyShowing].poses !== undefined ? this.routines[this.currentlyShowing].poses.length : 0 }<br>
-            Estimated Duration: ${this.routines[this.currentlyShowing].duration}<br>
-            <button class="button">Play</button>
-            <button class="button">Edit</button>
 
+        if($('.' + this.container).children().length == 0) {
+            $('.' + this.container).append(`  
+            <div class="routine">
+                <img src="${this.routines[this.currentlyShowing].image}">
+                <div class="routineSwiper">
+                    <div class="routineText">
+                        <div class="pagination">
+                        ${pagination}
+                        </div>
+                        <p class="routineHeader">${this.routines[this.currentlyShowing].name}</p>
+                        <p class="routineDesc">${this.routines[this.currentlyShowing].description}</p>
+                    </div>
+                    <div class="routineDescription">
+                        <!--# of poses: <span class="routinePoseCount">${this.routines[this.currentlyShowing].poses !== undefined ? this.routines[this.currentlyShowing].poses.length : 0 }</span><br>
+                        Estimated Duration: <span class="routineDuration">${this.routines[this.currentlyShowing].duration}</span><br>-->
+                        <div class="routineSplitRow">
+                            <div class="routineSplit">
+                                <i class="fas fa-list"></i><br>
+                                <span class="routinePoseCount">${this.routines[this.currentlyShowing].poses !== undefined ? this.routines[this.currentlyShowing].poses.length : 0 } poses</span>
+                            </div>
+                            <div class="routineSplit">
+                                <i class="far fa-clock"></i><br>
+                                <span class="routineDuration">${this.routines[this.currentlyShowing].duration}</span>
+                            </div><br>
+                        </div>
+ 
+                        <div class="routineShowMore">
+                            <p>Hey!</p>
+                            <p>Hey!</p>
+                            <p>Hey!</p>
+                            <p>Hey!</p>
+                            <p>Hey!</p>
+                            <p>Hey!</p>
+                            <p>Hey!</p>
+                            <p>Hey!</p>
+                            <p>Hey!</p>
+                            <p>Hey!</p>
+                            <p>Hey!</p>
+                            <p>Hey!</p>
+                            <p>Hey!</p>
+                            <p>Hey!</p>
+                            <p>Hey!</p>
+                            <p>Hey!</p>
+                        </div>
+                        <!--
+                        <button class="button" id="playRoutine">Play</button>
+                        <button class="button" id="editRoutine">Edit</button>
+                        -->
+                    </div>
+                </div>
             </div>
-        </div>
-        `)
+            `)
+
+            $('#playRoutine').on('touchend', () => {
+                playRoutine(this.routines[this.currentlyShowing].name)
+            })
+
+            $('#editRoutine').on('touchend', () => {
+                editRoutine(this.routines[this.currentlyShowing].name)
+            })
+
+        } else {
+            $('.routineHeader').text(this.routines[this.currentlyShowing].name)
+            $('.routineDesc').text(this.routines[this.currentlyShowing].name)
+            $('.pagination').html(pagination)
+            $('.routinePoseCount').text(this.routines[this.currentlyShowing].poses.length)
+            $('.routineDuration').text(this.routines[this.currentlyShowing].duration)
+
+            $("#page-browse > div > div > img").attr('src', this.routines[this.currentlyShowing].image);
+
+            $('#playRoutine').off('touchend');
+            $('#editRoutine').off('touchend');
+
+            $('#playRoutine').on('touchend', () => {
+                playRoutine(this.routines[this.currentlyShowing].name)
+            })
+
+            $('#editRoutine').on('touchend', () => {
+                editRoutine(this.routines[this.currentlyShowing].name)
+            })
+        }
+        
+    },
+    this.toggleShowMore = (onoff) => {
+        if(!onoff) {
+            $('.routineShowMore')[0].style.opacity = 0;
+            setTimeout(function() {
+                $('.routineShowMore')[0].style.display = 'none';
+            }, 250)
+        } else {
+            $('.routineShowMore')[0].style.display = 'block';
+            setTimeout(function() {
+                $('.routineShowMore')[0].style.opacity = 1;
+            }, 250)
+        }
     },
     this.handleSwipes = () => {
 
-        Hammer(document.getElementsByClassName(this.container)[0]).on('panright', (e) => {
-            //$('.' + this.container)[0].style.transform = `translateX(${e.deltaX}px)`;
+        Hammer(document.getElementsByClassName('routineContainer')[0].children[0].children[0]).on('panright', (e) => {
+            $('.' + this.container + " img")[0].style.transform = `translateX(${e.deltaX / 3}px)`;
 
             if(e.isFinal) {
                 this.currentlyShowing -= 1;
@@ -63,14 +140,14 @@ var routineList = function(container, prev, current, next) {
                 } else {
                     this.currentlyShowing += 1;
                 }
-                $('.' + this.container)[0].style.transform = `none`;
+                $('.' + this.container + " img")[0].style.transform = `none`;
                 
             }
 
         })
 
-        Hammer(document.getElementsByClassName(this.container)[0]).on('panleft', (e) => {
-            //$('.' + this.container)[0].style.transform = `translateX(${e.deltaX}px)`;
+        Hammer(document.getElementsByClassName('routineContainer')[0].children[0].children[0]).on('panleft', (e) => {
+            $('.' + this.container + " img")[0].style.transform = `translateX(${e.deltaX / 3}px)`;
             
             if(e.isFinal) {
                 this.currentlyShowing += 1;
@@ -79,9 +156,84 @@ var routineList = function(container, prev, current, next) {
                 } else {
                     this.currentlyShowing -= 1;
                 }
-                $('.' + this.container)[0].style.transform = `none`;
+                $('.' + this.container + " img")[0].style.transform = `none`;
 
             }
+        });
+
+        // Hammer(document.getElementsByClassName('routineSwiper')[0]).on('swipeup', (e) => {
+        //     document.getElementsByClassName('routineSwiper')[0].style.transform = `transformY(50px)`
+        // })
+
+        var swipeStart = 0;
+        var showMore = false;
+        var hideMore = false;
+        var isActive = false;
+        var addThisHeight = document.getElementsByClassName('routineSwiper')[0].children[0].clientHeight + document.getElementsByClassName('routineSwiper')[0].children[1].clientHeight;
+        var curH = 0;
+
+        $('.routineText').not($('.routineShowMore')[0]).on('touchstart', (e) => {
+            swipeStart = e.targetTouches[0].clientY;
+        });
+        $('.routineText').not($('.routineShowMore')[0]).on('touchmove', (e) => {
+            let h = document.getElementsByClassName('routineSwiper')[0].children[0].clientHeight + document.getElementsByClassName('routineSwiper')[0].children[1].clientHeight;
+
+            var dist = (-(e.targetTouches[0].clientY - swipeStart));
+            var threshCheck = (swipeStart - e.targetTouches[0].clientY);
+
+            if(threshCheck > 0) {
+                $('.routineSwiper')[0].style.bottom = `${dist}px`
+
+                if(threshCheck > 200) {
+                    showMore = true;
+                    hideMore = false;
+                } else {
+                    showMore = false;
+                    hideMore = true;
+                }
+            } else {
+                showMore = false;
+                if(isActive) {
+                    if(threshCheck < -100) {
+                        $('.routineSwiper')[0].style.bottom = `0px`
+                        this.toggleShowMore(false);
+                    } else {
+                        this.toggleShowMore(true);
+                        $('.routineSwiper')[0].style.bottom = `calc(100vh - ${h + Math.abs(threshCheck / 2)}px)`
+                        curH = Math.abs(threshCheck / 2);
+                    }
+                }
+            }
         })
+        $('.routineText').not($('.routineShowMore')[0]).on('touchend', (e) => {
+            let h = document.getElementsByClassName('routineSwiper')[0].children[0].clientHeight + document.getElementsByClassName('routineSwiper')[0].children[1].clientHeight;
+
+            if(showMore) {
+                isActive = true;
+                $('.routineSwiper')[0].style.bottom = `calc(100vh - ${h}px)`;
+                this.toggleShowMore(true);
+
+            } 
+
+            if(hideMore) {
+                $('.routineSwiper')[0].style.bottom = `0`;
+                this.toggleShowMore(false);
+
+            }
+
+            if(curH < 40) {
+                $('.routineSwiper')[0].style.bottom = `calc(100vh - ${h}px)`;
+                this.toggleShowMore(true);
+
+            }
+        });
     }
+}
+
+function playRoutine(name) {
+    alert("Playing: " + name);
+}
+
+function editRoutine(name){
+    alert("Editing: " + name);
 }

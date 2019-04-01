@@ -21,3 +21,28 @@ assets\MaleFrontView.svg, code is 192, comment is 0, blank is 20.
 index.html, code is 22, comment is 0, blank is 7.
 styles.css, code is 16, comment is 2, blank is 5.
 ===============================================================================
+===============================================================================
+EXTENSION NAME : linecount
+EXTENSION VERSION : 0.1.7
+-------------------------------------------------------------------------------
+count time : 2019-03-31 22:24:14
+count workspace : e:\Kenton Vizdos\Documents\Yogapp
+total files : 13
+total code lines : 608
+total comment lines : 11
+total blank lines : 98
+
+assets\css\main.1.css, code is 58, comment is 0, blank is 12.
+assets\css\main.css, code is 86, comment is 0, blank is 16.
+assets\css\navbar.css, code is 18, comment is 0, blank is 1.
+assets\info.js, code is 19, comment is 0, blank is 2.
+assets\js\main.js, code is 27, comment is 0, blank is 7.
+assets\js\navbar.js, code is 43, comment is 0, blank is 7.
+assets\js\routines\routineList.js, code is 74, comment is 2, blank is 11.
+assets\js\routines\Routines.js, code is 6, comment is 0, blank is 0.
+assets\js\userSettings.js, code is 0, comment is 0, blank is 0.
+assets\MainHandler.js, code is 61, comment is 7, blank is 17.
+assets\MaleFrontView.svg, code is 192, comment is 0, blank is 20.
+index.html, code is 8, comment is 0, blank is 0.
+styles.css, code is 16, comment is 2, blank is 5.
+===============================================================================
