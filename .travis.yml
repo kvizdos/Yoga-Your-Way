@@ -3,17 +3,9 @@ script:
   - npm install -g surge
   - sudo chmod +x getversion.sh
   - ./getversion.sh
-  - surge ./ --domain https://yogapp.surge.sh --token ${SURGE_TOKEN}
-# deploy:
-#   # steps:
-#   #   - script:
-#   #     name: Push to surge
-#   #     code: surge ./ --domain https://yogapp.surge.sh --token ${SURGE_TOKEN}
-#   - provider: surge
-#     project: ./
-#     domain: https://yogapp.surge.sh
-#     skip_cleanup: true
-# after-deploy:
-#   - ./getversion.sh
-on:
-  branch: master
+deploy:
+  provider: script
+  script: npm run deploy
+  skip_cleanup: true
+  on:
+    branch: master
