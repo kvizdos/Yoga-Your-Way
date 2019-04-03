@@ -4,8 +4,7 @@
   "description": "",
   "main": " ",
   "scripts": {
-    "test": "echo \"Error: no test specified\"",
-    "deploy": "surge --domain https://yogapp.surge.sh"
+    "test": "echo \"Error: no test specified\""
   },
   "repository": {
     "type": "git",
