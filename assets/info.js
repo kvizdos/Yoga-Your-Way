@@ -1,6 +1,7 @@
 var info = {
     "title": "Yogapp",
     "scripts": [
+        "version.js",
         "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js",
         "https://hammerjs.github.io/dist/hammer.min.js",
         "assets/js/Transition.js",
