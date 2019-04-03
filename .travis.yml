@@ -1,17 +1,19 @@
 language: node_js
-before-script:
+script:
   - npm install -g surge
   - sudo chmod +x getversion.sh
-deploy:
-  # steps:
-  #   - script:
-  #     name: Push to surge
-  #     code: surge ./ --domain https://yogapp.surge.sh --token ${SURGE_TOKEN}
-  - provider: surge
-    project: ./
-    domain: https://yogapp.surge.sh
-    skip_cleanup: true
-after-deploy:
   - ./getversion.sh
+  - surge ./ --domain https://yogapp.surge.sh --token ${SURGE_TOKEN}
+# deploy:
+#   # steps:
+#   #   - script:
+#   #     name: Push to surge
+#   #     code: surge ./ --domain https://yogapp.surge.sh --token ${SURGE_TOKEN}
+#   - provider: surge
+#     project: ./
+#     domain: https://yogapp.surge.sh
+#     skip_cleanup: true
+# after-deploy:
+#   - ./getversion.sh
 on:
   branch: master
