@@ -1,4 +1,7 @@
 language: node_js
+before-script:
+  - npm install -g surge
+  - sudo chmod +x getversion.sh
 deploy:
   # steps:
   #   - script:
