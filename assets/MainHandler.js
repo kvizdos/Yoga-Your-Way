@@ -12,6 +12,30 @@ function getUrlVars() {
 }
 
 window.onload = () => {
+    
+
+    var meta = info['meta'];
+    for(m in meta) {
+        let newMeta = document.createElement('meta');
+        newMeta.name = meta[m].name;
+        newMeta.content = meta[m].content;
+        document.querySelector('head').appendChild(newMeta);
+    }
+
+    
+
+    // Register SW & Manifest
+    let manifest = document.createElement('link');
+    manifest.rel = "manifest";
+    if(window.location.href == "http://localhost:5500/") manifest.href = "/manifest-dev.json";
+    if(window.location.href !== "http://localhost:5500/") manifest.href = "/manifest.json";
+
+    // let sw = document.createElement('script');
+    // sw.src = "../sw-register.js";
+
+    document.getElementsByTagName('head')[0].appendChild(manifest);
+    // document.getElementsByTagName('body')[0].appendChild(sw);
+    
     let urlParams = getUrlVars();
     if(urlParams['pwa'] == undefined || urlParams['pwa'] !== 'true') {
         document.getElementsByTagName('body')[0].style.backgroundColor = "#F69F0C";
@@ -24,14 +48,6 @@ window.onload = () => {
         document.getElementsByTagName('body')[0].style.color = "white";
 
         document.getElementsByTagName('body')[0].style.height = "100vh";
-
-        var meta = info['meta'];
-        for(m in meta) {
-            let newMeta = document.createElement('meta');
-            newMeta.name = meta[m].name;
-            newMeta.content = meta[m].content;
-            document.querySelector('head').appendChild(newMeta);
-        }
 
         document.getElementsByTagName('body')[0].innerText = "Hello, please install the app by adding this page to your home screen!";
         return;
@@ -94,32 +110,12 @@ window.onload = () => {
     var css = info['css'];
     var meta = info['meta'];
 
-
-    for(m in meta) {
-        let newMeta = document.createElement('meta');
-        newMeta.name = meta[m].name;
-        newMeta.content = meta[m].content;
-        document.querySelector('head').appendChild(newMeta);
-    }
-
     for(style in css) {
         let newCSS = document.createElement('link');
         newCSS.rel = "stylesheet";
         newCSS.href = css[style];
         document.querySelector('head').appendChild(newCSS);
     }
-
-    // Register SW & Manifest
-    let manifest = document.createElement('link');
-    manifest.rel = "manifest";
-    if(window.location.href == "http://localhost:5500/") manifest.href = "/manifest-dev.json";
-    if(window.location.href !== "http://localhost:5500/") manifest.href = "/manifest.json";
-
-    // let sw = document.createElement('script');
-    // sw.src = "../sw-register.js";
-
-    document.getElementsByTagName('head')[0].appendChild(manifest);
-    // document.getElementsByTagName('body')[0].appendChild(sw);
 
     var numOfScripts = scripts.length;
     var loadedScripts = 0;
