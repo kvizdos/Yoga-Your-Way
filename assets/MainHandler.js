@@ -13,7 +13,6 @@ function getUrlVars() {
 
 window.onload = () => {
     let urlParams = getUrlVars();
-    console.log("here: " + urlParams['pwa']);
     if(urlParams['pwa'] == undefined || urlParams['pwa'] !== 'true') {
         document.getElementsByTagName('body')[0].style.backgroundColor = "#F69F0C";
         document.getElementsByTagName('body')[0].style.textAlign = "center";
