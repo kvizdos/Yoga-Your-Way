@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/kvizdos/yogapp/issues"
   },
-  "homepage": "https://github.com/kvizdos/yogapp#readme"
+  "homepage": "https://github.com/kvizdos/yogapp#readme",
+  "dependencies": {
+    "npm": "^6.9.0"
+  }
 }
