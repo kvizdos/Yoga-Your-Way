@@ -1,3 +1,5 @@
+var _Transition = new Transition();
+
 var routineList = function(container, prev, current, next) {
     this.routines = JSON.parse(localStorage.getItem('routines')) !== null ? JSON.parse(localStorage.getItem('routines')) : [],
     this.currentlyShowing = 0,
@@ -10,7 +12,7 @@ var routineList = function(container, prev, current, next) {
     this.setup = (parent) => {
         let newRoutines = [];
         for(i in this.routines) {
-            var newRoutine = new Routine(this.routines[i].name, this.routines[i].description, this.routines[i].poses, this.routines[i].duration);
+            var newRoutine = new Routine(this.routines[i].name, this.routines[i].description, this.routines[i].poses, this.routines[i].duration, this.routines[i].image);
             newRoutines.push(newRoutine);
         }
         $(parent).append('<div class="routineContainer"></div>')
@@ -33,6 +35,23 @@ var routineList = function(container, prev, current, next) {
         }
 
         if($('.' + this.container).children().length == 0) {
+            let PL = "";
+            for(p in this.routines[this.currentlyShowing].poses) {
+                let currentP = this.routines[this.currentlyShowing].poses[p];
+
+                PL += `
+                <div class="poseListItem">
+                    <img src="${currentP.image}" />
+                    <p>${currentP.name}</p>
+                    <p class="duration">${currentP.duration} seconds</p>
+                </div><br>
+                `
+            }
+
+            PL += "<button id='playRoutine'>Start</button><br><button id='editRoutine'>Edit Routine</button>"
+
+            console.log(PL);
+
             $('.' + this.container).append(`  
             <div class="routine">
                 <img src="${this.routines[this.currentlyShowing].image}">
@@ -45,8 +64,6 @@ var routineList = function(container, prev, current, next) {
                         <p class="routineDesc">${this.routines[this.currentlyShowing].description}</p>
                     </div>
                     <div class="routineDescription">
-                        <!--# of poses: <span class="routinePoseCount">${this.routines[this.currentlyShowing].poses !== undefined ? this.routines[this.currentlyShowing].poses.length : 0 }</span><br>
-                        Estimated Duration: <span class="routineDuration">${this.routines[this.currentlyShowing].duration}</span><br>-->
                         <div class="routineSplitRow">
                             <div class="routineSplit">
                                 <i class="fas fa-list"></i><br>
@@ -59,22 +76,9 @@ var routineList = function(container, prev, current, next) {
                         </div>
  
                         <div class="routineShowMore">
-                            <p>Hey!</p>
-                            <p>Hey!</p>
-                            <p>Hey!</p>
-                            <p>Hey!</p>
-                            <p>Hey!</p>
-                            <p>Hey!</p>
-                            <p>Hey!</p>
-                            <p>Hey!</p>
-                            <p>Hey!</p>
-                            <p>Hey!</p>
-                            <p>Hey!</p>
-                            <p>Hey!</p>
-                            <p>Hey!</p>
-                            <p>Hey!</p>
-                            <p>Hey!</p>
-                            <p>Hey!</p>
+                            <div class="poseListContainer">
+                                ${PL}
+                            </div>
                         </div>
                         <!--
                         <button class="button" id="playRoutine">Play</button>
@@ -85,19 +89,19 @@ var routineList = function(container, prev, current, next) {
             </div>
             `)
 
-            $('#playRoutine').on('touchend', () => {
-                playRoutine(this.routines[this.currentlyShowing].name)
+            $('#playRoutine').on('touchend', (e) => {
+                playRoutine(this.routines[this.currentlyShowing].name, this.getRoutines(), e)
             })
 
-            $('#editRoutine').on('touchend', () => {
-                editRoutine(this.routines[this.currentlyShowing].name)
+            $('#editRoutine').on('touchend', (e) => {
+                editRoutine(this.routines[this.currentlyShowing].name, this.getRoutines(), e)
             })
 
         } else {
             $('.routineHeader').text(this.routines[this.currentlyShowing].name)
             $('.routineDesc').text(this.routines[this.currentlyShowing].name)
             $('.pagination').html(pagination)
-            $('.routinePoseCount').text(this.routines[this.currentlyShowing].poses.length)
+            $('.routinePoseCount').text(this.routines[this.currentlyShowing].poses.length + " poses")
             $('.routineDuration').text(this.routines[this.currentlyShowing].duration)
 
             $("#page-browse > div > div > img").attr('src', this.routines[this.currentlyShowing].image);
@@ -105,12 +109,12 @@ var routineList = function(container, prev, current, next) {
             $('#playRoutine').off('touchend');
             $('#editRoutine').off('touchend');
 
-            $('#playRoutine').on('touchend', () => {
-                playRoutine(this.routines[this.currentlyShowing].name)
+            $('#playRoutine').on('touchend', (e) => {
+                playRoutine(this.routines[this.currentlyShowing].name, this.getRoutines(), e)
             })
 
-            $('#editRoutine').on('touchend', () => {
-                editRoutine(this.routines[this.currentlyShowing].name)
+            $('#editRoutine').on('touchend', (e) => {
+                editRoutine(this.routines[this.currentlyShowing].name, this.getRoutines(), e)
             })
         }
         
@@ -230,8 +234,15 @@ var routineList = function(container, prev, current, next) {
     }
 }
 
-function playRoutine(name) {
-    alert("Playing: " + name);
+function playRoutine(name, allRoutines, event) {
+    var currentRoutine = allRoutines.filter((r) => {
+        return r.name == name;
+    })
+
+    _Transition.show("Loading...", event.changedTouches[0].clientX, event.changedTouches[0].clientY, 'page-start', currentRoutine, (r) => {
+        setCurrentRoutine(r); 
+        _StartPage.setup()
+    }, true)
 }
 
 function editRoutine(name){

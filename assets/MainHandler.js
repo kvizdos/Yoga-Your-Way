@@ -56,7 +56,8 @@ window.onload = () => {
     // Register SW & Manifest
     let manifest = document.createElement('link');
     manifest.rel = "manifest";
-    manifest.href = "/manifest.json";
+    if(window.location.href == "http://localhost:5500/") manifest.href = "/manifest-dev.json";
+    if(window.location.href !== "http://localhost:5500/") manifest.href = "/yogapp/manifest.json";
 
     let sw = document.createElement('script');
     sw.src = "../sw-register.js";

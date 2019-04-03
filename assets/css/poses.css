@@ -1,0 +1,80 @@
+.poseListContainer {
+    display: block;
+}
+
+.poseListItem {
+    width: 100%;
+    float: left;
+    border-bottom: 2px solid #f69f0c;
+}
+
+.poseListItem p {
+    float: left;
+}
+
+.poseListItem p.duration {
+    color: #9e6000;
+    float:right;
+}
+
+.poseListItem img {
+    float: left;
+    width: 55px;
+}
+
+.poseListContainer button {
+    width: calc(100%);
+    border: 0;
+    padding: 5px;
+    font-size: 14pt;
+    background-color: #F69F0C;
+    color: white;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.activePoseInfo {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+#progress {
+    width: 20vh;
+    height: 20vh;
+    /* background-color: red; */
+    /* border: 10px solid #F69F0C; */
+    border: 16px solid rgb(241, 185, 31);
+    border-top: 16px solid #F69F0C;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#progress:not(.progressInternals) {
+    transform: rotate(45deg);
+    transition: 50ms;
+}
+
+.progressInternals {
+    text-align: center;
+}
+
+.secondsLeft {
+    font-size: 18pt;
+}
+
+.poseName {
+    font-size: 24pt;
+    font-weight: bold;
+}
+
+.nextPose {
+    font-size: 14pt;
+}
+
+.progressInternals {
+    margin-top: 10px;
+}
