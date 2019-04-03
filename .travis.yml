@@ -11,5 +11,7 @@ deploy:
     project: ./
     domain: https://yogapp.surge.sh
     skip_cleanup: true
+after-deploy:
+  - ./getversion.sh
 on:
   branch: master
