@@ -50,8 +50,6 @@ var routineList = function(container, prev, current, next) {
 
             PL += "<button id='playRoutine'>Start</button><br><button id='editRoutine'>Edit Routine</button>"
 
-            console.log(PL);
-
             $('.' + this.container).append(`  
             <div class="routine">
                 <img src="${this.routines[this.currentlyShowing].image}">

@@ -21,7 +21,7 @@ var StartPage = function() {
                 <div class="progressInternals">
                     <span class="secondsLeft">10 seconds</span><br>
                     <span class="poseName">Pose Name</span>
-                    <br><br>
+                    <br>
                     <span class="nextPose">Up Next: <span id="nextPoseNote">X</span></span>
                 </div>
             </div>

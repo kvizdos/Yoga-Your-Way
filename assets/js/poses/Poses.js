@@ -20,9 +20,7 @@ var PoseHandler = function() {
     this.setFav = (id) => {
         // set favorite
     },
-    this.initialize = () => {
-        console.log("initializing");
-        
+    this.initialize = () => {        
         // Get all sitting/floor poses
         var sittingfloor = PoseList.filter((pose) => {
             return pose.category == "sittingfloor";
@@ -65,12 +63,6 @@ var PoseHandler = function() {
                     break;
             }
         }
-
-        console.log(this.sittingfloor);
-        console.log(this.armbalance);
-        console.log(this.backbending);
-        console.log(this.twisting);
-        console.log(this.allposes);
 
         localStorage.setItem('sittingfloor', JSON.stringify(this.sittingfloor));
         localStorage.setItem('armbalance', JSON.stringify(this.armbalance));

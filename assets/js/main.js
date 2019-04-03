@@ -1,7 +1,11 @@
-var _RoutineHandler = new routineList('routineContainer', '.prevRoutine', '.currRoutine', '.nextRoutine');
-var _PoseHandler = new PoseHandler();
-var _Navbar = new Navbar(0);
-var _StartPage = new StartPage();
+try {
+    var _RoutineHandler = new routineList('routineContainer', '.prevRoutine', '.currRoutine', '.nextRoutine');
+    var _PoseHandler = new PoseHandler();
+    var _Navbar = new Navbar(0);
+    var _StartPage = new StartPage();
+} catch(err) {
+    window.location = window.location;
+}
 
 var routines = _RoutineHandler.getRoutines();
 
