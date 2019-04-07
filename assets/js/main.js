@@ -3,6 +3,7 @@ try {
     var _PoseHandler = new PoseHandler();
     var _Navbar = new Navbar(0);
     var _StartPage = new StartPage();
+    var _CreatePage = new CreatePage(_RoutineHandler, _PoseHandler);
 } catch(err) {
     window.location = window.location;
 }
@@ -40,7 +41,8 @@ var Load = () => {
         _RoutineHandler.handleSwipes();
     });
     _Navbar.addPage('Create', 'plus', true, (parent) => {
-        $(parent).append("Create page");
+        _CreatePage.render(parent);
+        _CreatePage.handleTaps();
     });
     _Navbar.addPage('Settings', 'cog', true, (parent) => {
         $(parent).append("Settings page");
@@ -49,4 +51,5 @@ var Load = () => {
     _Navbar.addPage('Start', '', false, (parent) => {
         _StartPage.render(parent, "routine");
     });
+    
 }

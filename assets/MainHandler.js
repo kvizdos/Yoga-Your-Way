@@ -1,5 +1,5 @@
 var loadInfo = document.createElement('script');
-loadInfo.src = "./assets/info.js";
+loadInfo.src = "./environment/info.js";
 loadInfo.id = "loadingInfoRemove";
 document.querySelector('head').appendChild(loadInfo);
 
@@ -21,8 +21,6 @@ window.onload = () => {
         newMeta.content = meta[m].content;
         document.querySelector('head').appendChild(newMeta);
     }
-
-    
 
     // Register SW & Manifest
     let manifest = document.createElement('link');
@@ -117,31 +115,40 @@ window.onload = () => {
         document.querySelector('head').appendChild(newCSS);
     }
 
-    var numOfScripts = scripts.length;
-    var loadedScripts = 0;
+    numOfScripts = scripts.length;
+    loadScripts(scripts);
+}
 
-    for(script in scripts) {
-        let newScript = document.createElement('script');
-        newScript.src = scripts[script];
 
-            newScript.onload = (e) => {
-                loadedScripts++;
-                console.log(Math.floor((loadedScripts / numOfScripts) * 100) + "% loaded ("+newScript.src+")");
-                if(loadedScripts == numOfScripts) {
-                    $('#loadingScreenBarPercent')[0].style.width = "calc(" + Math.floor((loadedScripts / numOfScripts) * 100) + "% - 60px)";
-                    // console.log("All loaded, final script: " + newScript.src);
-                    Load();
+var numOfScripts;
+var loadedScripts = 0;
+function loadScripts(scripts) {
+    let newScript = document.createElement('script');
+    newScript.src = scripts[0];
 
-                    setTimeout(function() {
-                        _Navbar.render();
-                        $('#loadingScreenContainer').remove()
-                        $("#mainHandler").remove();
-                        $("#loadingInfoRemove").remove();
-                    }, 1000)
-                }
-            }
+    scripts = scripts.splice(1);
 
-        document.querySelector('head').appendChild(newScript);
+    newScript.onload = (e) => {
+        loadedScripts++;
+        $('#loadingScreenBarPercent')[0].style.width = "calc(" + Math.floor((loadedScripts / numOfScripts) * 100) + "% - 60px)";
+        // console.log("All loaded, final script: " + newScript.src);
+        if(scripts.length == 0) {
+            Load();
+            setTimeout(function() {
+                _Navbar.render();
+                $('#loadingScreenContainer').remove()
+                $("#mainHandler").remove();
+                $("#loadingInfoRemove").remove();
+            }, 1000)
+        } else {
+            loadScripts(scripts);
+        }
     }
+
+    newScript.onerror = (e) => {
+        window.location.reload();
+    }
+
+    document.querySelector('head').appendChild(newScript);
 
 }

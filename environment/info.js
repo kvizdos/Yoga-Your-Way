@@ -1,9 +1,9 @@
 var info = {
     "title": "Yogapp",
     "scripts": [
-        "version.js",
         "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js",
         "https://hammerjs.github.io/dist/hammer.min.js",
+        "version.js",
         "assets/js/Transition.js",
         "assets/js/routines/routineList.js",
         "assets/js/routines/Routines.js",
@@ -11,6 +11,7 @@ var info = {
         "assets/js/poses/Poses.js",
         "assets/js/start/countdown.js",
         "assets/js/start/startpage.js",
+        "assets/js/create/createpage.js",
         "assets/js/navbar.js",
         "assets/js/main.js",
     ],
@@ -18,7 +19,8 @@ var info = {
         "https://use.fontawesome.com/releases/v5.8.1/css/all.css",
         "assets/css/navbar.css",
         "assets/css/main.css",
-        "assets/css/poses.css"
+        "assets/css/poses.css",
+        "assets/css/create.css"
     ],
     "meta": [
         { name: "description", content: "" },

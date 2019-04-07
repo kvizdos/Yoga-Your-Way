@@ -1,0 +1,82 @@
+#listContainer {
+    height: calc(100vh - 50px);
+    overflow: scroll;
+}
+
+.sectionHeader {
+    text-align: center;
+    font-weight: bold;
+    padding: 0;
+    margin: 8px;
+    font-size: 18pt;
+}
+
+#listContainer .selectPose {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #c1c1c1;
+    color: #c1c1c1;
+    border-radius: 100%;
+    margin-left: auto;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-size: 18pt;
+    transition: 150ms;
+}
+
+#listContainer .selected {
+    border: 5px solid #6ade7e;
+    color: #6ade7e;
+    transition: 150ms;
+}
+
+#listContainer i {
+    transition: 250ms;
+}
+
+#listContainer .listItem {
+    border: 2px solid #F69F0C;
+    display: flex;
+    align-items: center;
+    margin: 15px;
+    border-radius: 15px;
+    padding: 8px;
+    text-align: center;
+}
+
+#listContainer .listItem img {
+    height: 80px
+}
+
+#createBtn {
+    position: fixed;
+    top: calc(100vh - 105px);
+    width: 75%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #F69F0C;
+    background-color: rgb(247, 178, 60);
+    font-size: 12pt;
+    margin: 0 auto;
+    left: calc((50vw * .5) - (75% * .15));
+    color: white;
+}
+
+#infoContainer input {
+    margin: 15px;
+    padding: 8px;
+    width: calc(100vw - 50px);
+    font-size: 12pt;
+    border-radius: 10px;
+    border: 2px solid #F69F0C;
+}
+
+#infoContainer #listContainerConfirmation .listItem {
+    border-top: 2px solid #F69F0C;
+}
+
+#infoContainer #listContainerConfirmation .listItem:last-child {
+    border-bottom: 2px solid #F69F0C;
+}

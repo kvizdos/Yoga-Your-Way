@@ -17,6 +17,16 @@ var PoseHandler = function() {
 
         return pose;
     },
+    this.getPoses = () => {
+        return {
+            all: this.allposes,
+            sittingfloor: this.sittingfloor,
+            twisting: this.twisting,
+            backbending: this.backbending,
+            armbalance: this.armbalance,
+            favs: this.favPoses
+        }
+    },
     this.setFav = (id) => {
         // set favorite
     },
