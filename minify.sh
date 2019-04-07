@@ -5,7 +5,7 @@ echo "Latest: $VERSION";
 echo "const _LASTCOMMIT = '$VERSION';console.warn('Current Version: ' + _LASTCOMMIT);const _DEV = true;" > version.js
 
 echo "Obfuscating Files!";
-javascript-obfuscator ./ --output ./dist --compact true --stringArray false
+javascript-obfuscator ./ --exclude ./node_modules/* --output ./dist --compact true --stringArray false
 
 mkdir ./dist/assets/css
 
