@@ -5,6 +5,7 @@ var CreatePage = function(RH, PH) {
     this.RoutineHandler = RH,
     this.PoseHandler = PH,
     this.allPoses = [],
+    this.registeredPoses = [],
     this.render = (parent) => {
         this.parent = parent;
 
@@ -34,19 +35,6 @@ var CreatePage = function(RH, PH) {
                     newRoutine.removePose(poses[poseNum]);
                 }
 
-                // $('#' + id + " i").text(poseCount);
-                // for(let i = 0; i < document.querySelectorAll('.selected').length; i++) {
-                //     console.log(i);
-                //     document.querySelectorAll('.selected')[i].innerText = i + 1;
-                // }
-
-
-                // let allEls = newRoutine.getEls();
-                // console.log(allEls);
-                // for(el in allEls) {
-                //     console.log(allEls[el][0]);
-                //     allEls[el][0].innerText = parseInt(el) + 1;
-                // }
             }, 125)
         })
     },
@@ -60,7 +48,7 @@ var CreatePage = function(RH, PH) {
         SelectContainer.id = "selectContainer";
 
         let createBtn = document.createElement('button');
-        createBtn.innerText = "Create";
+        createBtn.innerText = "Continue";
         createBtn.id = "createBtn";
         createBtn.onclick = () => { this.setInfoPage() };
 
@@ -119,16 +107,24 @@ var CreatePage = function(RH, PH) {
         header.className = "sectionHeader";
         header.innerText = "Please fill out the fields below:"
 
+        let setupBtn = document.createElement('button');
+        setupBtn.innerText = "Create";
+        setupBtn.id = "createBtn";
+        setupBtn.onclick = () => { this.registerPose() };
+
         let routineNameInput = document.createElement('input');
         routineNameInput.name = "name";
+        routineNameInput.id = "routineName";
         routineNameInput.placeholder = "Routine Name";
 
         let routineDescriptionInput = document.createElement('input');
         routineDescriptionInput.name = "description";
+        routineDescriptionInput.id = "routineDescription";
         routineDescriptionInput.placeholder = "Routine Description";
 
 
         InfoContainer.appendChild(header);
+        InfoContainer.appendChild(setupBtn);
 
         InfoContainer.appendChild(routineNameInput);
         InfoContainer.appendChild(document.createElement('br'));
@@ -162,6 +158,10 @@ var CreatePage = function(RH, PH) {
                 PoseItem.appendChild(PoseName);
 
                 PoseList.appendChild(PoseItem);
+
+                let newPose = this.PoseHandler.getPose(poses[pose].name);
+
+                this.registeredPoses.push(newPose);
             }
 
             InfoContainer.appendChild(PoseList)
@@ -172,5 +172,19 @@ var CreatePage = function(RH, PH) {
 
         document.getElementById(this.parent.substr(1)).appendChild(InfoContainer);
 
+    },
+
+    this.registerPose = () => {
+        let name = $('#routineName').val();
+        let description = $('#routineDescription').val();
+
+        if(name == '' || description == '') {alert("Please fill out all of the information."); return;}
+
+        let PoseImageLocation = "./assets/images/poses/";
+        let newRoutine = new Routine(name, description, this.registeredPoses, 15, PoseImageLocation + 't_pose_1.svg')
+
+        this.RoutineHandler.addRoutine(newRoutine);
+
+        window.location.reload();
     }
 }

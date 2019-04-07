@@ -64,10 +64,14 @@
     color: white;
 }
 
+#infoContainer {
+    padding: 15px;
+}
+
 #infoContainer input {
-    margin: 15px;
     padding: 8px;
-    width: calc(100vw - 50px);
+    width: calc(100vw - 40px);
+    margin-bottom: 15px;
     font-size: 12pt;
     border-radius: 10px;
     border: 2px solid #F69F0C;
@@ -75,6 +79,11 @@
 
 #infoContainer #listContainerConfirmation .listItem {
     border-top: 2px solid #F69F0C;
+}
+
+#infoContainer #listContainerConfirmation .listItem p {
+    padding: 10px;
+    margin: 0;
 }
 
 #infoContainer #listContainerConfirmation .listItem:last-child {

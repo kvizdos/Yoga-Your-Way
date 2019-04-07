@@ -33,23 +33,23 @@ var routineList = function(container, prev, current, next) {
             if(i == this.currentlyShowing) classname += " active";
             pagination += "<div class='"+classname+"'>&nbsp;</div>"
         }
+        
+        let PL = "";
+        for(p in this.routines[this.currentlyShowing].poses) {
+            let currentP = this.routines[this.currentlyShowing].poses[p];
+            PL += `
+            <div class="poseListItem">
+                <img src="${currentP.image}" />
+                <p>${currentP.name}</p>
+                <p class="duration">${currentP.duration} seconds</p>
+            </div><br>
+            `
+        }
+
+        PL += "<button id='playRoutine'>Start</button><br><button id='editRoutine'>Edit Routine</button>"
+
 
         if($('.' + this.container).children().length == 0) {
-            let PL = "";
-            for(p in this.routines[this.currentlyShowing].poses) {
-                let currentP = this.routines[this.currentlyShowing].poses[p];
-
-                PL += `
-                <div class="poseListItem">
-                    <img src="${currentP.image}" />
-                    <p>${currentP.name}</p>
-                    <p class="duration">${currentP.duration} seconds</p>
-                </div><br>
-                `
-            }
-
-            PL += "<button id='playRoutine'>Start</button><br><button id='editRoutine'>Edit Routine</button>"
-
             $('.' + this.container).append(`  
             <div class="routine">
                 <img src="${this.routines[this.currentlyShowing].image}">
@@ -101,6 +101,7 @@ var routineList = function(container, prev, current, next) {
             $('.pagination').html(pagination)
             $('.routinePoseCount').text(this.routines[this.currentlyShowing].poses.length + " poses")
             $('.routineDuration').text(this.routines[this.currentlyShowing].duration)
+            $('.poseListContainer').html(PL);
 
             $("#page-browse > div > div > img").attr('src', this.routines[this.currentlyShowing].image);
 
