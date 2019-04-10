@@ -40,6 +40,10 @@
     align-items: center;
 }
 
+#activePoseImg {
+    max-height: 50vh;
+}
+
 #progress {
     width: 20vh;
     height: 20vh;

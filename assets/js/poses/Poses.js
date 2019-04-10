@@ -2,6 +2,7 @@ var PoseImageLocation = "./assets/images/poses/";
 
 var PoseHandler = function() {
     this.sittingfloor = [],
+    this.standing =  [],
     this.twisting = [],
     this.backbending = [],
     this.armbalance = [],
@@ -24,6 +25,7 @@ var PoseHandler = function() {
             twisting: this.twisting,
             backbending: this.backbending,
             armbalance: this.armbalance,
+            standing: this.standing,
             favs: this.favPoses
         }
     },
@@ -34,6 +36,11 @@ var PoseHandler = function() {
         // Get all sitting/floor poses
         var sittingfloor = PoseList.filter((pose) => {
             return pose.category == "sittingfloor";
+        })
+
+        // Get standing poses
+        var standing = PoseList.filter((pose) => {
+            return pose.category == "standing";
         })
 
         // Get all twisting poses
@@ -55,12 +62,23 @@ var PoseHandler = function() {
         for(pose in PoseList) {
             let p = PoseList[pose];
 
-            let newPose = new Pose(p.name, p.description, `/assets/images/poses/${p.category}/${p.name.replace(/\ /g, "_").toLowerCase()}.svg`, p.category, p.duration);
+            let editedName = p.name.replace(/\ /g, "_").replace(/-/g, "_").toLowerCase();
+            let usingCat = p.category;
+
+            if(editedName !== "half_moon_pose") {
+                editedName = "t_pose";
+                usingCat = "t_pose";
+            }
+
+            let newPose = new Pose(p.name, p.description, `/assets/images/poses/${usingCat}/${editedName}/${editedName}_1.svg`, p.category, p.duration, p.amountOfImages);
         
             this.allposes.push(newPose);
             switch(p.category) {
                 case "sittingfloor":
                     this.sittingfloor.push(newPose);
+                    break;
+                case "standing":
+                    this.standing.push(newPose);
                     break;
                 case "armbalance":
                     this.armbalance.push(newPose);
@@ -75,6 +93,7 @@ var PoseHandler = function() {
         }
 
         localStorage.setItem('sittingfloor', JSON.stringify(this.sittingfloor));
+        localStorage.setItem('standing', JSON.stringify(this.standing));
         localStorage.setItem('armbalance', JSON.stringify(this.armbalance));
         localStorage.setItem('backbending', JSON.stringify(this.backbending));
         localStorage.setItem('twisting', JSON.stringify(this.twisting));
@@ -83,10 +102,13 @@ var PoseHandler = function() {
     }
 }
 
-var Pose = function(name, description, image, category, duration = 5) {
+var Pose = function(name, description, image, category, duration = 5, amountOfImages = 0) {
     this.name = name,
     this.description = description,
     this.image = image,
+    this.amountOfImages = amountOfImages,
     this.category = category,
-    this.duration = duration
+    this.duration = duration,
+    this.audio = image.replace("_1.svg", ".mp3"),
+    console.log(this.audio);
 }

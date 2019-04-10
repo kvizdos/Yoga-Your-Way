@@ -17,6 +17,10 @@ var StartPage = function() {
                 <div class="activePoseInfo">
                     <div id="progress">
                     </div>
+
+                    <div id="audio">
+                        <audio id="audioSource"></audio>
+                    </div>
                 </div>
                 <div class="progressInternals">
                     <span class="secondsLeft">10 seconds</span><br>
@@ -33,7 +37,9 @@ var StartPage = function() {
             let duration = poses[0].duration;
             let nextPose = poses[1] !== undefined ? poses[1].name : "You're Done!";
 
-            Countdown.render(duration, pose, poses[0].image, nextPose).then((r) => {
+
+            console.log(poses[0]);
+            Countdown.render(duration, pose, poses[0].image, nextPose, poses[0].audio, poses[0].amountOfImages).then((r) => {
                 poses = poses.slice(1);
                 if(poses.length > 0) {
                     return new Promise((r, j) => {
@@ -48,13 +54,16 @@ var StartPage = function() {
     }
     this.setup = () => {
         var currPoses = currentRoutine[0].poses;
-        var newPoses = [{name: "Get ready!", duration: 15, image: currentRoutine[0].poses[0].image}];
+        var newPoses = [{name: "Get ready!", duration: 5, image: currentRoutine[0].poses[0].image, audio: "NO AUDIO"}];
 
         for(var item in currPoses) {
             item = currPoses[item];
             newPoses.push(item);
-            newPoses.push({name: "Break", duration: 8, image: currentRoutine[0].poses[0].image})
+
+            newPoses.push({name: "Break", duration: 8, image: currentRoutine[0].poses[0].image, audio: "NO AUDIO"})
         }
+
+        console.log(newPoses);
 
         this.runCountdown(newPoses).then((r) => {
             Transitioner.show("You're all done!", "50vw", "50vh", "page-browse", [], () => {});

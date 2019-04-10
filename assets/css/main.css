@@ -33,6 +33,7 @@ body {
 .routine img {
     width: 100vw;
     transition: 150ms;
+    max-height: 56.5vh;
 }
 
 .routineText {

@@ -39,7 +39,11 @@ function createCacheBustedRequest(url) {
         return caches.open(CURRENT_CACHES.offline).then(function(cache) {
           return cache.put(OFFLINE_URL, response);
         });
-      })
+      }),
+      
+      // caches.open("offline-v1").then((cache) => {
+      //   return cache.addAll(info['scripts']);
+      // })
     );
   });
   

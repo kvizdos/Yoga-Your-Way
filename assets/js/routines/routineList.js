@@ -37,6 +37,7 @@ var routineList = function(container, prev, current, next) {
         let PL = "";
         for(p in this.routines[this.currentlyShowing].poses) {
             let currentP = this.routines[this.currentlyShowing].poses[p];
+
             PL += `
             <div class="poseListItem">
                 <img src="${currentP.image}" />
@@ -130,6 +131,7 @@ var routineList = function(container, prev, current, next) {
                 $('.routineShowMore')[0].style.opacity = 1;
             }, 250)
         }
+    
     },
     this.handleSwipes = () => {
 
@@ -199,14 +201,13 @@ var routineList = function(container, prev, current, next) {
                 if(isActive) {
                     if(threshCheck < -100) {
                         $('.routineSwiper')[0].style.bottom = `0px`
-                        this.toggleShowMore(false);
                     } else {
-                        this.toggleShowMore(true);
                         $('.routineSwiper')[0].style.bottom = `calc(100vh - ${h + Math.abs(threshCheck / 2)}px)`
                         curH = Math.abs(threshCheck / 2);
                     }
                 }
             }
+
         })
         $('.routineText').not($('.routineShowMore')[0]).on('touchend', (e) => {
             let h = document.getElementsByClassName('routineSwiper')[0].children[0].clientHeight + document.getElementsByClassName('routineSwiper')[0].children[1].clientHeight;
@@ -214,21 +215,13 @@ var routineList = function(container, prev, current, next) {
             if(showMore) {
                 isActive = true;
                 $('.routineSwiper')[0].style.bottom = `calc(100vh - ${h}px)`;
+                
                 this.toggleShowMore(true);
-
-            } 
-
-            if(hideMore) {
+            } else if(!showMore) {
                 $('.routineSwiper')[0].style.bottom = `0`;
                 this.toggleShowMore(false);
-
             }
 
-            if(curH < 40) {
-                $('.routineSwiper')[0].style.bottom = `calc(100vh - ${h}px)`;
-                this.toggleShowMore(true);
-
-            }
         });
     }
 }

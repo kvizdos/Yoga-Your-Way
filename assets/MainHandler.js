@@ -1,6 +1,19 @@
 var loadInfo = document.createElement('script');
 loadInfo.src = "./environment/info.js";
 loadInfo.id = "loadingInfoRemove";
+
+loadInfo.onload = (e) => {
+    let manifest = document.createElement('link');
+    manifest.rel = "manifest";
+    if(window.location.href == "http://localhost:5500/") manifest.href = "/manifest-dev.json";
+    if(window.location.href !== "http://localhost:5500/") manifest.href = "/manifest.json";
+    let sw = document.createElement('script');
+    sw.src = "../sw-register.js";
+
+    document.getElementsByTagName('head')[0].appendChild(manifest);
+    document.getElementsByTagName('body')[0].appendChild(sw);
+}
+
 document.querySelector('head').appendChild(loadInfo);
 
 function getUrlVars() {
@@ -22,16 +35,16 @@ window.onload = () => {
         document.querySelector('head').appendChild(newMeta);
     }
 
-    // Register SW & Manifest
-    let manifest = document.createElement('link');
-    manifest.rel = "manifest";
-    if(window.location.href == "http://localhost:5500/") manifest.href = "/manifest-dev.json";
-    if(window.location.href !== "http://localhost:5500/") manifest.href = "/manifest.json";
+    // // Register SW & Manifest
+    // let manifest = document.createElement('link');
+    // manifest.rel = "manifest";
+    // if(window.location.href == "http://localhost:5500/") manifest.href = "/manifest-dev.json";
+    // if(window.location.href !== "http://localhost:5500/") manifest.href = "/manifest.json";
 
     // let sw = document.createElement('script');
     // sw.src = "../sw-register.js";
 
-    document.getElementsByTagName('head')[0].appendChild(manifest);
+    // document.getElementsByTagName('head')[0].appendChild(manifest);
     // document.getElementsByTagName('body')[0].appendChild(sw);
     
     let urlParams = getUrlVars();
