@@ -30,10 +30,8 @@ var CountdownClock = function() {
                         let nextImage;
                         if(activeImg < imageCount) {
                             nextImage = currentlyShowing.replace(activeImg.toString(), activeImg + 1);
-                            console.log("NEXT IAMGE!")
                         } else {
                             nextImage = currentlyShowing.replace(activeImg.toString(), "1");
-                            console.log("GO BACK");
                         }
 
                         currentlyShowing = nextImage;
