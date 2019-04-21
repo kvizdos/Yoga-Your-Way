@@ -17,6 +17,6 @@ for file in ./assets/css/*.css; do
 done
 
 cp ./environment/info.js ./environment/info.backup.js
-mv ./environment/info.prod.js ./environment/info.js
+#mv ./environment/info.prod.js ./environment/info.js
 
 echo "Done obfuscating";
