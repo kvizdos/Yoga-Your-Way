@@ -4,6 +4,8 @@ try {
     var _Navbar = new Navbar(0);
     var _StartPage = new StartPage();
     var _CreatePage = new CreatePage(_RoutineHandler, _PoseHandler);
+    var _SettingsPage = new SettingsPage('settingsContainer');
+    const _SettingsHandler = new SettingsHandler();
 } catch(err) {
     window.location = window.location;
 }
@@ -45,7 +47,7 @@ var Load = () => {
         _CreatePage.handleTaps();
     });
     _Navbar.addPage('Settings', 'cog', true, (parent) => {
-        $(parent).append("Settings page");
+        _SettingsPage.render(parent);
     });
 
     _Navbar.addPage('Start', '', false, (parent) => {

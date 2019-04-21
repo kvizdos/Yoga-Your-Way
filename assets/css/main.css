@@ -2,6 +2,10 @@
     font-family: 'Acme', sans-serif;
 }
 
+*:focus {
+    outline-width: 0;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -156,4 +160,34 @@ body {
     background-color: #ffc019;
     transition: 250ms;
     display: none;
+}
+
+#voiceSelector {
+    display: flex;
+}
+
+#voiceSelector .button {
+    text-align: center;
+    margin: 10px;
+    padding: 10px;
+}
+
+#voiceSelector .voiceBtn i {
+    font-size: 4em !important;
+    padding: 8px;
+}
+
+.activeVoice {
+    background-color: #ffcb00 !important;
+}
+
+#leaveRoutine {
+    font-size: 18pt;
+    padding: 16px;
+    color: white;
+    background-color: orange;
+    border: 0;
+    border-radius: 50px;
+    /* bottom: 0; */
+    margin: 16px;
 }

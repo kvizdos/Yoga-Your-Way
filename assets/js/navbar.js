@@ -28,7 +28,6 @@ var Navbar = function(active) {
 }
 
 const navigateTo = (page, extras = [], cb = () => {}, hideNavbar = false) => {
-    console.log(hideNavbar);
     if(hideNavbar) $('#navbar').hide();
     if(!hideNavbar) $('#navbar').show();
     $('[id^="page-"]').hide();

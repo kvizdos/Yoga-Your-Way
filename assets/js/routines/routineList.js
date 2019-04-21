@@ -40,7 +40,7 @@ var routineList = function(container, prev, current, next) {
 
             PL += `
             <div class="poseListItem">
-                <img src="${currentP.image}" />
+                <img src="${'./' + currentP.image}" />
                 <p>${currentP.name}</p>
                 <p class="duration">${currentP.duration} seconds</p>
             </div><br>

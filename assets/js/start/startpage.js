@@ -7,7 +7,21 @@ var setCurrentRoutine = (routine) => {
 }
 
 var StartPage = function() {
+    this.parent = "",
+    this.handleTaps = () => {
+        console.log("Handling tapperoos");
+        $('#progress').on('touchend', (e) => {
+            console.log("TAPPPPED");
+            Countdown.togglePlay();
+        })
+
+        $('#leaveRoutine').on('touchend', (e) => {
+            Countdown.stopCountdown();
+            Transitioner.show("All done!", "50vw", "50vh", "page-browse", [], () => {});
+        });
+    },
     this.render = (parent) => {
+        this.parent = parent;
         $(parent).append(`
             <div class="activePoseContainer">
                 <div class="activePose">
@@ -15,8 +29,7 @@ var StartPage = function() {
                 </div>
 
                 <div class="activePoseInfo">
-                    <div id="progress">
-                    </div>
+                    <i id="progress" class="fas fa-pause-circle"></i>
 
                     <div id="audio">
                         <audio id="audioSource"></audio>
@@ -27,9 +40,12 @@ var StartPage = function() {
                     <span class="poseName">Pose Name</span>
                     <br>
                     <span class="nextPose">Up Next: <span id="nextPoseNote">X</span></span>
+                    <br>
+                    <button id="leaveRoutine"><i class="fas fa-arrow-circle-left"></i> Stop</button>
                 </div>
             </div>
         `);
+        this.handleTaps();
     },
     this.runCountdown = async (poses) => {
         return new Promise((resolve, reject) => {
@@ -37,8 +53,6 @@ var StartPage = function() {
             let duration = poses[0].duration;
             let nextPose = poses[1] !== undefined ? poses[1].name : "You're Done!";
 
-
-            console.log(poses[0]);
             Countdown.render(duration, pose, poses[0].image, nextPose, poses[0].audio, poses[0].amountOfImages).then((r) => {
                 poses = poses.slice(1);
                 if(poses.length > 0) {
@@ -51,8 +65,8 @@ var StartPage = function() {
             });
             
         })
-    }
-    this.setup = () => {
+    },
+    this.setup = () => {                
         var currPoses = currentRoutine[0].poses;
         var newPoses = [{name: "Get ready!", duration: 5, image: currentRoutine[0].poses[0].image, audio: "NO AUDIO"}];
 
@@ -62,11 +76,8 @@ var StartPage = function() {
 
             newPoses.push({name: "Break", duration: 8, image: currentRoutine[0].poses[0].image, audio: "NO AUDIO"})
         }
-
-        console.log(newPoses);
-
         this.runCountdown(newPoses).then((r) => {
             Transitioner.show("You're all done!", "50vw", "50vh", "page-browse", [], () => {});
         });
-    } 
+    }
 }

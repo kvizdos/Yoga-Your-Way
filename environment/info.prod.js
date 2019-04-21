@@ -13,6 +13,8 @@ var info = {
         "./dist/assets/js/start/countdown.js",
         "./dist/assets/js/start/startpage.js",
         "./dist/assets/js/create/createpage.js",
+        "./dist/assets/js/settings/settingsHandler.js",
+        "./dist/assets/js/settings/settings.js",
         "./dist/assets/js/navbar.js",
         "./dist/assets/js/main.js",
     ],

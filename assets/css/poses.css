@@ -45,21 +45,18 @@
 }
 
 #progress {
-    width: 20vh;
-    height: 20vh;
+    /* width: 20vh;
+    height: 20vh; */
     /* background-color: red; */
     /* border: 10px solid #F69F0C; */
-    border: 16px solid rgb(241, 185, 31);
+    /* border: 16px solid rgb(241, 185, 31);
     border-top: 16px solid #F69F0C;
-    border-radius: 50%;
+    border-radius: 50%; */
+    color: #F69F0C;
+    font-size: 8em;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-#progress:not(.progressInternals) {
-    transform: rotate(45deg);
-    transition: 50ms;
 }
 
 .progressInternals {
