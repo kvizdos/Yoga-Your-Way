@@ -59,6 +59,33 @@ var CreatePage = function(RH, PH) {
         PoseListHeader.className = "sectionHeader";
         PoseListHeader.innerText = "Select Poses:"
 
+        let CatSelector = document.createElement('div');
+            CatSelector.style.display = "flex";
+            CatSelector.style.overflow = "scroll";
+            CatSelector.style.width = "500vw";
+        let CatAll = document.createElement('p');
+            CatAll.innerText = "ALL";
+        
+        let CatSitFloor = document.createElement('p');
+            CatSitFloor.innerText = "Sitting & Floor";
+        
+        let CatStanding = document.createElement('p');
+            CatStanding.innerText = "Standing";
+        
+        let CatTwisting = document.createElement('p');
+            CatTwisting.innerText = "Twisting";
+        
+        let CatBackbending = document.createElement('p');
+            CatBackbending.innerText = "Backbending";
+        
+        CatSelector.appendChild(CatAll);
+        CatSelector.appendChild(CatSitFloor);
+        CatSelector.appendChild(CatStanding);
+        CatSelector.appendChild(CatTwisting);
+        CatSelector.appendChild(CatBackbending);
+
+        // PoseListHeader.appendChild(CatSelector);
+
         PoseList.appendChild(PoseListHeader);
 
         for(pose in poses) {
@@ -69,7 +96,15 @@ var CreatePage = function(RH, PH) {
             PoseImage.src = poses[pose].image;
 
             let PoseName = document.createElement('p');
-            PoseName.innerText = poses[pose].name;
+
+            let tc = poses[pose].category;
+            let c = tc == "standing" ? "Standing Posture" :
+                    tc == "sittingfloor" ? "Sitting and Floor Posture" : 
+                    tc == "backbending" ? "Back-bending Posture" :
+                    tc == "twisting" ? "Twist and Abdominal Toner" :
+                    "Uncategorized";
+
+            PoseName.innerHTML = `<strong>${poses[pose].name}</strong><br>${c}` ;
 
             let SelectPose = document.createElement('div');
             SelectPose.className = "selectPose";
@@ -143,16 +178,20 @@ var CreatePage = function(RH, PH) {
 
             let poses = newRoutine.getPoses();
 
-
             for(pose in poses) {
                 let PoseItem = document.createElement('div');
                 PoseItem.className = "listItem";
 
-                // let PoseImage = document.createElement('img');
-                // PoseImage.src = poses[pose].image;
-
                 let PoseName = document.createElement('p');
-                PoseName.innerText = poses[pose].name;
+
+                let tc = poses[pose].category;
+                let c = tc == "standing" ? "Standing Posture" :
+                        tc == "sittingfloor" ? "Sitting and Floor Posture" : 
+                        tc == "backbending" ? "Back-bending Posture" :
+                        tc == "twisting" ? "Twist and Abdominal Toner" :
+                        "Uncategorized";
+
+                PoseName.innerHTML = `<strong>${poses[pose].name}</strong><br>${c}` ;
 
                 // PoseItem.appendChild(PoseImage);
                 PoseItem.appendChild(PoseName);

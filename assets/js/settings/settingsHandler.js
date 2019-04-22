@@ -1,4 +1,8 @@
 var SettingsHandler = function() {
+    this.setup = () => {
+        console.log("Setting Settings LS");
+        localStorage.setItem('settings', '[{"voice": "male"}]')
+    },
     this.setSetting = (setting, val) => {
         let current = JSON.parse(localStorage.getItem('settings')) !== null ? JSON.parse(localStorage.getItem('settings')) : [];
         
@@ -18,7 +22,9 @@ var SettingsHandler = function() {
         
         let found = current.filter((s) => {
             return Object.keys(s)[0] == setting;
-        })[0][setting];
+        });
+        if(found.length > 0) found = found[0][setting];
+
         return setting == "ALL" ? current : found;
     }
 }

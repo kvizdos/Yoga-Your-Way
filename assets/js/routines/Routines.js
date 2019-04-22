@@ -2,7 +2,14 @@ var Routine = function(name, description, poses, duration, image) {
     this.name = name,
     this.description = description,
     this.poses = poses,
-    this.duration = duration,
+    this.getDuration = () => {
+        let total = 0;
+        for(pose of this.poses) {
+            total += pose.duration;
+        }
+        return Math.ceil(total / 60);
+    },
+    this.duration = "~" + this.getDuration() + " minutes";
     this.image = image,
     this.getPoses = () => {
         return this.poses;

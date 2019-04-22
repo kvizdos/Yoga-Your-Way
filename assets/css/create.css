@@ -43,11 +43,11 @@
     margin: 15px;
     border-radius: 15px;
     padding: 8px;
-    text-align: center;
 }
 
 #listContainer .listItem img {
-    height: 80px
+    width: 80px;
+    height: 80px;
 }
 
 #createBtn {

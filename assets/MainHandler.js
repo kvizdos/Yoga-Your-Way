@@ -5,10 +5,10 @@ loadInfo.id = "loadingInfoRemove";
 loadInfo.onload = (e) => {
     let manifest = document.createElement('link');
     manifest.rel = "manifest";
-    if(window.location.href == "http://localhost:5500/") manifest.href = "/manifest-dev.json";
-    if(window.location.href !== "http://localhost:5500/") manifest.href = "/manifest.json";
+    if(window.location.href == "http://localhost:5500/") manifest.href = "./manifest-dev.json";
+    if(window.location.href !== "http://localhost:5500/") manifest.href = "./manifest.json";
     let sw = document.createElement('script');
-    sw.src = "../sw-register.js";
+    sw.src = "./sw-register.js";
 
     document.getElementsByTagName('head')[0].appendChild(manifest);
     document.getElementsByTagName('body')[0].appendChild(sw);

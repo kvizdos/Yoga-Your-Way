@@ -32,7 +32,8 @@ var PoseHandler = function() {
     this.setFav = (id) => {
         // set favorite
     },
-    this.initialize = () => {        
+    this.initialize = () => {      
+        console.warn("Initializing All Poses");  
         // Get all sitting/floor poses
         var sittingfloor = PoseList.filter((pose) => {
             return pose.category == "sittingfloor";
@@ -65,13 +66,13 @@ var PoseHandler = function() {
             let editedName = p.name.replace(/\ /g, "_").replace(/-/g, "_").toLowerCase();
             let usingCat = p.category;
 
-            if(editedName !== "half_moon_pose") {
-                editedName = "t_pose";
-                usingCat = "t_pose";
-            }
+            // if(editedName !== "half_moon_pose") {
+            //     editedName = "t_pose";
+            //     usingCat = "t_pose";
+            // }
 
             let newPose = new Pose(p.name, p.description, `/assets/images/poses/${usingCat}/${editedName}/${editedName}_1.svg`, p.category, p.duration, p.amountOfImages);
-        
+
             this.allposes.push(newPose);
             switch(p.category) {
                 case "sittingfloor":
@@ -105,7 +106,7 @@ var PoseHandler = function() {
 var Pose = function(name, description, image, category, duration = 5, amountOfImages = 0) {
     this.name = name,
     this.description = description,
-    this.image = image,
+    this.image = './' + image,
     this.amountOfImages = amountOfImages,
     this.category = category,
     this.duration = duration,

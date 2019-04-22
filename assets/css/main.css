@@ -118,8 +118,12 @@ body {
 
 .routineSplitRow {
     width: calc(100vw - 20px);
-    display: block;
+    display: flex;
     z-index: 50;
+    height: 80%;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
 }
 .routineSplit {
     display: flex;
@@ -135,6 +139,8 @@ body {
     border-radius: 5px;
     text-align: center;
     height:  calc((30vh / 1.6));
+
+    max-height: 90px;
 }
 
 .routineMsg {

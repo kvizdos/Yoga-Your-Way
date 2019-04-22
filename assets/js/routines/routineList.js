@@ -166,16 +166,9 @@ var routineList = function(container, prev, current, next) {
             }
         });
 
-        // Hammer(document.getElementsByClassName('routineSwiper')[0]).on('swipeup', (e) => {
-        //     document.getElementsByClassName('routineSwiper')[0].style.transform = `transformY(50px)`
-        // })
-
         var swipeStart = 0;
         var showMore = false;
-        var hideMore = false;
         var isActive = false;
-        var addThisHeight = document.getElementsByClassName('routineSwiper')[0].children[0].clientHeight + document.getElementsByClassName('routineSwiper')[0].children[1].clientHeight;
-        var curH = 0;
 
         $('.routineText').not($('.routineShowMore')[0]).on('touchstart', (e) => {
             swipeStart = e.targetTouches[0].clientY;

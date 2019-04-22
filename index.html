@@ -2,6 +2,7 @@
 <html>
     <head>
         <script id="mainHandler" src="assets/MainHandler.js"></script>
+        <link rel="manifest" href="./manifest.json">
         <style>
             body {
                 margin: 0;
@@ -12,11 +13,11 @@
     </head>
     <body>
         <script>
-            if ('serviceWorker' in navigator) {
-                window.addEventListener('load', function() {
-                    navigator.serviceWorker.register('./sw.js');
-                });
-            }
+            // if ('serviceWorker' in navigator) {
+            //     window.addEventListener('load', function() {
+            //         navigator.serviceWorker.register('./sw.js');
+            //     });
+            // }
         </script>
     </body>
 </html>

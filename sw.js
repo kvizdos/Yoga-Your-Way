@@ -34,16 +34,22 @@ function createCacheBustedRequest(url) {
   }
   
   self.addEventListener('install', event => {
+    const filesToCache = [
+      '/',
+      'assets/',
+      'index.html',
+    ];
+    console.log('Attempting to install service worker and cache static assets')
+
     event.waitUntil(
-      fetch(createCacheBustedRequest(OFFLINE_URL)).then(function(response) {
-        return caches.open(CURRENT_CACHES.offline).then(function(cache) {
-          return cache.put(OFFLINE_URL, response);
-        });
-      }),
-      
-      // caches.open("offline-v1").then((cache) => {
-      //   return cache.addAll(info['scripts']);
-      // })
+      // fetch(createCacheBustedRequest(OFFLINE_URL)).then(function(response) {
+      //   return caches.open(CURRENT_CACHES.offline).then(function(cache) {
+      //     return cache.put(OFFLINE_URL, response);
+      //   });
+      // }),
+      caches.open('pages-cache-v1').then(cache => {
+        return cache.addAll(filesToCache);
+      })
     );
   });
   

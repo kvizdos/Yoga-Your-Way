@@ -53,7 +53,11 @@ var StartPage = function() {
             let duration = poses[0].duration;
             let nextPose = poses[1] !== undefined ? poses[1].name : "You're Done!";
 
-            Countdown.render(duration, pose, poses[0].image, nextPose, poses[0].audio, poses[0].amountOfImages).then((r) => {
+            let audio = _SettingsHandler.getSetting('voice') == "male" ? poses[0].audio.replace('.mp3', '_m.mp3') : poses[0].audio.replace('.mp3', '_f.mp3');
+
+            console.log(audio);
+
+            Countdown.render(duration, pose, poses[0].image, nextPose, audio, poses[0].amountOfImages).then((r) => {
                 poses = poses.slice(1);
                 if(poses.length > 0) {
                     return new Promise((r, j) => {

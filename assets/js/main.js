@@ -16,25 +16,17 @@ var PoseImageLocation = "./assets/images/poses/";
 
 var Load = () => {
     _PoseHandler.initialize();
+    if(_SettingsHandler.getSetting('voice') == "") _SettingsHandler.setup();
 
     if(routines.length == 0) {
-
         var warmupPoses = [];
         let warmupPose1 = _PoseHandler.getPose("Half-Moon Pose");
-        let warmupPose2 = _PoseHandler.getPose("Child Pose");
-        let warmupPose3 = _PoseHandler.getPose("Double Leg Raises");
 
         warmupPoses.push(warmupPose1);
-        warmupPoses.push(warmupPose2);
-        warmupPoses.push(warmupPose3);
 
         var warmupRoutine = new Routine('Warmup Routine', 'This is the warmup routine for each day.', warmupPoses, '12 minutes', PoseImageLocation + 'standing/half_moon_pose/half_moon_pose_1.svg');
-        var middleRoutine = new Routine('Middle Routine', 'This is the middle routine for each day.', [], '8 minutes', PoseImageLocation + 't_pose_2.svg');
-        var cooldownRoutine = new Routine('Cooldown Routine', 'This is the cooldown routine for each day.', [], '20 minutes', PoseImageLocation + 't_pose_3.svg');
-
+    
         _RoutineHandler.addRoutine(warmupRoutine);
-        _RoutineHandler.addRoutine(middleRoutine);
-        _RoutineHandler.addRoutine(cooldownRoutine);
     } 
     
     _Navbar.addPage('Browse', 'book-open', true, (parent) => {
