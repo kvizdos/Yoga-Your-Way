@@ -71,21 +71,22 @@ window.onload = () => {
     loadingScreen.style.justifyContent = "center";
     loadingScreen.style.alignContent = "center";
     loadingScreen.style.alignItems = "center";
-    loadingScreen.style.backgroundColor = "#F69F0C";
+    // loadingScreen.style.backgroundColor = "#F69F0C";
     loadingScreen.style.zIndex = "999";
+    loadingScreen.style.backgroundImage = "url('./assets/images/splash.svg')"
+    loadingScreen.style.backgroundSize = "cover";
+    loadingScreen.style.backgroundPosition = "center";
 
     loadingScreen.id = "loadingScreen";
 
     let loadingScreenMsg = document.createElement('h2');
-    loadingScreenMsg.textContent = "Loading..";
-
     loadingScreen.appendChild(loadingScreenMsg);
 
     loadingScreenContainer.id = "loadingScreenContainer";
     loadingScreenContainer.style.display = "absolute";
     loadingScreenContainer.style.width = "100vw";
     loadingScreenContainer.style.height = "100vh";
-    loadingScreenContainer.style.backgroundColor = "#F69F0C";
+    // loadingScreenContainer.style.backgroundColor = "#F69F0C";
     loadingScreenContainer.style.zIndex = "999";
 
     loadingScreenContainer.appendChild(loadingScreen);
@@ -94,7 +95,7 @@ window.onload = () => {
     loadingScreenBar.id = "loadingScreenBar";
     loadingScreenBar.style.width = "calc(100% - 60px)";
     loadingScreenBar.style.height = "10px";
-    loadingScreenBar.style.backgroundColor = "rgb(243, 139, 21)";
+    // loadingScreenBar.style.backgroundColor = "rgb(243, 139, 21)";
     loadingScreenBar.style.position = "absolute";
     loadingScreenBar.style.top = "50vh";
     loadingScreenBar.style.margin = "30px";
@@ -106,7 +107,7 @@ window.onload = () => {
     loadingScreenBarPercent.style.height = "10px";
     loadingScreenBarPercent.style.backgroundColor = "rgb(241, 185, 31)";
     loadingScreenBarPercent.style.position = "absolute";
-    loadingScreenBarPercent.style.top = "50vh";
+    loadingScreenBarPercent.style.top = "65vh";
     loadingScreenBarPercent.style.margin = "30px";
     loadingScreenBarPercent.style.borderRadius = "10px";
     loadingScreenBarPercent.style.transition = "250ms";

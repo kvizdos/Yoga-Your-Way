@@ -11,6 +11,11 @@
     font-size: 18pt;
 }
 
+.sectionHeader i {
+    float: left;
+    color: #F69F0C;
+}
+
 #listContainer .selectPose {
     width: 50px;
     height: 50px;

@@ -39,7 +39,7 @@ function createCacheBustedRequest(url) {
       'assets/',
       'index.html',
     ];
-    console.log('Attempting to install service worker and cache static assets')
+    console.warn('Attempting to install service worker and cache static assets')
 
     event.waitUntil(
       // fetch(createCacheBustedRequest(OFFLINE_URL)).then(function(response) {

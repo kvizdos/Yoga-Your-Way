@@ -55,9 +55,15 @@ var CreatePage = function(RH, PH) {
         let PoseList = document.createElement('div');
         PoseList.id = "listContainer";
 
+        let HamClicker = document.createElement('i');
+        // <i class="fas fa-hamburger" id="hamMenu"></i>
+            HamClicker.className = "fas fa-hamburger";
+            HamClicker.id = "hamMenu";
+            HamClicker.onclick = () => { this.showMyHam() } 
         let PoseListHeader = document.createElement('p');
-        PoseListHeader.className = "sectionHeader";
-        PoseListHeader.innerText = "Select Poses:"
+            PoseListHeader.className = "sectionHeader";
+            PoseListHeader.innerHTML = 'Select Poses:';
+
 
         let CatSelector = document.createElement('div');
             CatSelector.style.display = "flex";
@@ -84,13 +90,59 @@ var CreatePage = function(RH, PH) {
         CatSelector.appendChild(CatTwisting);
         CatSelector.appendChild(CatBackbending);
 
+        CatAll.onclick = () => {
+            this.selectPose('all');
+        }
+
+        CatSitFloor.onclick = () => {
+            this.selectPose('sittingfloor');
+        }
+
+        CatStanding.onclick = () => {
+            this.selectPose('standing');
+        }
+
+        CatTwisting.onclick = () => {
+            this.selectPose('twisting');
+        }
+
+        CatBackbending.onclick = () => {
+            this.selectPose('backbending');
+        }
+        let HamMenu = document.createElement('div');
+            HamMenu.id = "myHam";
+            HamMenu.style = `z-index: 10000;
+                            padding: 5px;
+                            display: none;
+                            place-content: center;
+                            /* align-items: center; */
+                            overflow: hidden;
+                            width: 100vw;
+                            background-color: rgb(246, 159, 12);
+                            transition: all 50ms ease 0s;
+                            flex-flow: row wrap;
+                            text-align: center;`
+
+        let HamContent = document.createElement('div');
+            HamContent.style.fontSize = "18pt";
+            HamContent.style.color = "white";
+            HamContent.appendChild(CatAll);
+            HamContent.appendChild(CatSitFloor);
+            HamContent.appendChild(CatStanding);
+            HamContent.appendChild(CatTwisting);
+            HamContent.appendChild(CatBackbending);
+
+        HamMenu.appendChild(HamContent);
+        PoseList.appendChild(HamMenu);
+
         // PoseListHeader.appendChild(CatSelector);
 
+        PoseListHeader.appendChild(HamClicker);
         PoseList.appendChild(PoseListHeader);
 
         for(pose in poses) {
             let PoseItem = document.createElement('div');
-            PoseItem.className = "listItem";
+            PoseItem.className = "listItem " + poses[pose].category;
 
             let PoseImage = document.createElement('img');
             PoseImage.src = poses[pose].image;
@@ -107,7 +159,7 @@ var CreatePage = function(RH, PH) {
             PoseName.innerHTML = `<strong>${poses[pose].name}</strong><br>${c}` ;
 
             let SelectPose = document.createElement('div');
-            SelectPose.className = "selectPose";
+            SelectPose.className = "selectPose ";
             SelectPose.id = "pose-" + pose;
 
             let SelectPoseTxt = document.createElement('i');
@@ -132,6 +184,7 @@ var CreatePage = function(RH, PH) {
         SelectContainer.appendChild(PoseList);
 
         document.getElementById(this.parent.substr(1)).appendChild(SelectContainer);
+
 
     },
     this.setInfoPage = () => {
@@ -191,7 +244,7 @@ var CreatePage = function(RH, PH) {
                         tc == "twisting" ? "Twist and Abdominal Toner" :
                         "Uncategorized";
 
-                PoseName.innerHTML = `<strong>${poses[pose].name}</strong><br>${c}` ;
+                PoseName.innerHTML = `<input id="${poses[pose].name.replace(/\ /g, "_").replace(/\-/g, "_").toLowerCase()}" style="float: right; width: 30px; text-align: center;" type="number" min=${poses[pose].duration} value="${poses[pose].duration}" /><strong>${poses[pose].name}</strong><br>${c}` ;
 
                 // PoseItem.appendChild(PoseImage);
                 PoseItem.appendChild(PoseName);
@@ -219,11 +272,32 @@ var CreatePage = function(RH, PH) {
 
         if(name == '' || description == '') {alert("Please fill out all of the information."); return;}
 
+        for(pose of this.registeredPoses) {
+            let inp = $('#' + pose.name.replace(/\ /g, "_").replace(/\-/g, "_").toLowerCase()).val();
+            if((parseInt(inp) < parseInt(pose.duration))) {
+                alert("Please make sure your times are over the minimum.");
+                return;
+            }
+
+            pose.duration = parseInt(inp);
+        }
+
         let PoseImageLocation = "./assets/images/poses/";
         let newRoutine = new Routine(name, description, this.registeredPoses, 15, PoseImageLocation + 't_pose_1.svg')
 
         this.RoutineHandler.addRoutine(newRoutine);
 
         window.location.reload();
+    },
+    this.myHamIsShowing = false,
+    this.showMyHam = () => {
+        this.myHamIsShowing = !this.myHamIsShowing;
+        $('#myHam')[0].style.display = this.myHamIsShowing ? "flex" : "none";
+    },
+    this.selectPose = (cat) => {
+        $('.listItem').hide();
+        if(cat == "all") $('.listItem').show();
+        if(cat !== "all") $('.' + cat).show();
+        this.showMyHam();
     }
 }
