@@ -23,7 +23,8 @@ var info = {
         "./dist/assets/css/navbar.css",
         "./dist/assets/css/main.css",
         "./dist/assets/css/poses.css",
-        "./dist/assets/css/create.css"
+        "./dist/assets/css/create.css",
+        "./dist/assets/css/playpause.css"
     ],
     "meta": [
         { name: "description", content: "" },

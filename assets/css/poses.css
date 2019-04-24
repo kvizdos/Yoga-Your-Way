@@ -10,6 +10,8 @@
 
 .poseListItem p {
     float: left;
+    font-size: 12pt;
+    color: #9e6000;
 }
 
 .poseListItem p.duration {

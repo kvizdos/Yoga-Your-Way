@@ -34,7 +34,7 @@ var CountdownClock = function() {
 
             $('#activePoseImg').attr('src',  image)
             $('.poseName').text(poseName);
-            $('.secondsLeft').text((timeInSeconds) + " Seconds");
+            $('.secondsLeft').text(timeInSeconds == 1 ? (timeInSeconds) + " second" : (timeInSeconds) + " seconds");
             $('#nextPoseNote').text(nextPoseName);
 
             this.activeAudio = audioSource;
@@ -82,7 +82,7 @@ var CountdownClock = function() {
                             resolve("done");
                             clearInterval(cd);
                         } else {
-                            $('.secondsLeft').text((currentlyAt) + " Seconds");
+                            $('.secondsLeft').text(currentlyAt == 1 ? (currentlyAt) + " second" : (currentlyAt) + " seconds");
                         }
                     }
                     currentRot += 18.2;

@@ -16,14 +16,15 @@ var info = {
         "./assets/js/create/createpage.js",
         "./assets/js/settings/settings.js",
         "./assets/js/navbar.js",
-        "./assets/js/main.js",
+        "./assets/js/main.js"
     ],
     "css": [
         "https://use.fontawesome.com/releases/v5.8.1/css/all.css",
         "./assets/css/navbar.css",
         "./assets/css/main.css",
         "./assets/css/poses.css",
-        "./assets/css/create.css"
+        "./assets/css/create.css",
+        "./assets/css/playpause.css"
     ],
     "meta": [
         { name: "description", content: "" },

@@ -40,14 +40,13 @@ var routineList = function(container, prev, current, next) {
 
             PL += `
             <div class="poseListItem">
-                <img src="${'./' + currentP.image}" />
                 <p>${currentP.name}</p>
-                <p class="duration">${currentP.duration} seconds</p>
+                <p class="duration">${currentP.duration}s</p>
             </div><br>
             `
         }
 
-        PL += "<button id='playRoutine'>Start</button><br><button id='editRoutine'>Edit Routine</button>"
+        PL += "<button id='playRoutine'>Start</button><br><!--<button id='editRoutine'>Edit Routine</button>-->"
 
 
         if($('.' + this.container).children().length == 0) {
@@ -56,6 +55,12 @@ var routineList = function(container, prev, current, next) {
                 <img src="${this.routines[this.currentlyShowing].image}">
                 <div class="routineSwiper">
                     <div class="routineText">
+                    <i class="fas fa-chevron-up" style="
+                        /* display: block; */
+                        /* background-color: gold; */
+                        font-size: 20pt;
+                        transition: 500ms;
+                    " id="showMoreInfo"></i>
                         <div class="pagination">
                         ${pagination}
                         </div>
@@ -135,6 +140,15 @@ var routineList = function(container, prev, current, next) {
     },
     this.handleSwipes = () => {
 
+        $('#showMoreInfo').on('touchend', (e) => {
+            showMore = !showMore;
+            this.toggleShowMore(showMore);
+
+            if(showMore) $('#showMoreInfo')[0].style.transform = "rotate(180deg)";
+            if(!showMore) $('#showMoreInfo')[0].style.transform = "rotate(0deg)";
+
+        })
+
         Hammer(document.getElementsByClassName('routineContainer')[0].children[0].children[0]).on('panright', (e) => {
             $('.' + this.container + " img")[0].style.transform = `translateX(${e.deltaX / 3}px)`;
 
@@ -196,6 +210,9 @@ var routineList = function(container, prev, current, next) {
                         $('.routineSwiper')[0].style.bottom = `0px`
                     } else {
                         $('.routineSwiper')[0].style.bottom = `calc(100vh - ${h + Math.abs(threshCheck / 2)}px)`
+
+                        if(showMore) $('#showMoreInfo')[0].style.transform = "rotate(180deg)";
+                        if(!showMore) $('#showMoreInfo')[0].style.transform = "rotate(0deg)";
                         curH = Math.abs(threshCheck / 2);
                     }
                 }
@@ -209,9 +226,13 @@ var routineList = function(container, prev, current, next) {
                 isActive = true;
                 $('.routineSwiper')[0].style.bottom = `calc(100vh - ${h}px)`;
                 
+
+                $('#showMoreInfo')[0].style.transform = "rotate(180deg)";
                 this.toggleShowMore(true);
             } else if(!showMore) {
                 $('.routineSwiper')[0].style.bottom = `0`;
+
+                $('#showMoreInfo')[0].style.transform = "rotate(0deg)";
                 this.toggleShowMore(false);
             }
 
