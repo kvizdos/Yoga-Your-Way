@@ -9,9 +9,11 @@
 .shapeshifter {
   animation-duration: 300ms;
   animation-timing-function: steps(18);
+  animation-fill-mode: forwards;
   width: 24px;
   height: 24px;
   background-repeat: no-repeat;
+  
 }
 .shapeshifter.play {
   animation-name: play18;

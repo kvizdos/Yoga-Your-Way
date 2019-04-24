@@ -30,6 +30,7 @@ var StartPage = function() {
 
                 <div class="activePoseInfo">
                     <i id="progress" class="fas fa-pause-circle"></i>
+                    <!--<div id="progress" class="shapeshifter play" style="background-image: url(./assets/images/playpause.svg)"></div>-->
 
                     <div id="audio">
                         <audio id="audioSource"></audio>
