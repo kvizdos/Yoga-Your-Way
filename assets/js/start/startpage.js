@@ -57,7 +57,6 @@ var StartPage = function() {
             let audio = _SettingsHandler.getSetting('voice') == "male" ? poses[0].audio.replace('.mp3', '_m.mp3') : poses[0].audio.replace('.mp3', '_f.mp3');
 
             console.log(audio);
-
             Countdown.render(duration, pose, poses[0].image, nextPose, audio, poses[0].amountOfImages).then((r) => {
                 poses = poses.slice(1);
                 if(poses.length > 0) {

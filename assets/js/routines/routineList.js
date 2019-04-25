@@ -52,6 +52,7 @@ var routineList = function(container, prev, current, next) {
         if($('.' + this.container).children().length == 0) {
             $('.' + this.container).append(`  
             <div class="routine">
+            
                 <img src="${this.routines[this.currentlyShowing].image}">
                 <div class="routineSwiper">
                     <div class="routineText">
@@ -140,6 +141,30 @@ var routineList = function(container, prev, current, next) {
     },
     this.handleSwipes = () => {
 
+        // $('.changeRoutine').on('touchend', (e) => {
+        //     let cn = e.target.className.split(" ")[1];
+        //     console.log('clickee');
+        //     if(cn == "fa-chevron-right") {
+        //         console.log("GO RIGHTTT");
+        //         this.currentlyShowing += 1;
+        //         if(this.routines[this.currentlyShowing] !== undefined) {
+        //             this.render();
+        //         } else {
+        //             this.currentlyShowing -= 1;
+        //         }
+        //         $('.' + this.container + " img")[0].style.transform = `none`;
+        //     } else {
+        //         console.log("GO LEFFTT");
+        //         this.currentlyShowing -= 1;
+        //         if(this.routines[this.currentlyShowing] !== undefined) {
+        //             this.render();
+        //         } else {
+        //             this.currentlyShowing += 1;
+        //         }
+        //         $('.' + this.container + " img")[0].style.transform = `none`;
+        //     }
+        // })
+
         $('#showMoreInfo').on('touchend', (e) => {
             showMore = !showMore;
             this.toggleShowMore(showMore);
@@ -225,8 +250,6 @@ var routineList = function(container, prev, current, next) {
             if(showMore) {
                 isActive = true;
                 $('.routineSwiper')[0].style.bottom = `calc(100vh - ${h}px)`;
-                
-
                 $('#showMoreInfo')[0].style.transform = "rotate(180deg)";
                 this.toggleShowMore(true);
             } else if(!showMore) {

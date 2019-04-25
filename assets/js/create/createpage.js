@@ -63,7 +63,7 @@ var CreatePage = function(RH, PH) {
 
         let HamClicker = document.createElement('i');
         // <i class="fas fa-hamburger" id="hamMenu"></i>
-            HamClicker.className = "fas fa-hamburger";
+            HamClicker.className = Math.floor(Math.random() * 1000) == 50 ? "fas fa-hamburger" : "fas fa-bars";
             HamClicker.id = "hamMenu";
             HamClicker.onclick = () => { this.showMyHam() } 
         let PoseListHeader = document.createElement('p');
@@ -211,10 +211,10 @@ var CreatePage = function(RH, PH) {
         routineNameInput.id = "routineName";
         routineNameInput.placeholder = "Routine Name";
 
-        let routineDescriptionInput = document.createElement('input');
-        routineDescriptionInput.name = "description";
-        routineDescriptionInput.id = "routineDescription";
-        routineDescriptionInput.placeholder = "Routine Description";
+        // let routineDescriptionInput = document.createElement('input');
+        // routineDescriptionInput.name = "description";
+        // routineDescriptionInput.id = "routineDescription";
+        // routineDescriptionInput.placeholder = "Routine Description";
 
 
         InfoContainer.appendChild(header);
@@ -222,7 +222,7 @@ var CreatePage = function(RH, PH) {
 
         InfoContainer.appendChild(routineNameInput);
         InfoContainer.appendChild(document.createElement('br'));
-        InfoContainer.appendChild(routineDescriptionInput);
+        // InfoContainer.appendChild(routineDescriptionInput);
 
         let poseHeader = document.createElement('p');
         poseHeader.className = "sectionHeader";
@@ -338,9 +338,9 @@ var CreatePage = function(RH, PH) {
 
     this.registerPose = () => {
         let name = $('#routineName').val();
-        let description = $('#routineDescription').val();
+        // let description = $('#routineDescription').val();
 
-        if(name == '' || description == '') {alert("Please fill out all of the information."); return;}
+        if(name == '') {alert("Please fill out all of the information."); return;}
 
         for(pose of this.registeredPoses) {
             let inp = $('#' + pose.name.replace(/\ /g, "_").replace(/\-/g, "_").toLowerCase()).val();
@@ -353,7 +353,7 @@ var CreatePage = function(RH, PH) {
         }
 
         let PoseImageLocation = "./assets/images/poses/";
-        let newRoutine = new Routine(name, description, this.registeredPoses, 15, PoseImageLocation + 't_pose_1.svg')
+        let newRoutine = new Routine(name, "", this.registeredPoses, 15, this.registeredPoses[0].image);
 
         this.RoutineHandler.addRoutine(newRoutine);
 

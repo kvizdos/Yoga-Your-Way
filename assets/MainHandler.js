@@ -49,18 +49,7 @@ window.onload = () => {
     
     let urlParams = getUrlVars();
     if(urlParams['pwa'] == undefined || urlParams['pwa'] !== 'true') {
-        document.getElementsByTagName('body')[0].style.backgroundColor = "#F69F0C";
-        document.getElementsByTagName('body')[0].style.textAlign = "center";
-        document.getElementsByTagName('body')[0].style.display = "flex";
-        document.getElementsByTagName('body')[0].style.justifyContent = "center";
-        document.getElementsByTagName('body')[0].style.alignContent = "center";
-        document.getElementsByTagName('body')[0].style.alignItems = "center";
-        document.getElementsByTagName('body')[0].style.fontSize = "2em";
-        document.getElementsByTagName('body')[0].style.color = "white";
-
-        document.getElementsByTagName('body')[0].style.height = "100vh";
-
-        document.getElementsByTagName('body')[0].innerText = "Hello, please install the app by adding this page to your home screen!";
+        window.location.href = "./install.html";
         return;
     }
     let loadingScreenContainer = document.createElement('div');
