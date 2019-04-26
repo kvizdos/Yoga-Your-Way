@@ -189,13 +189,26 @@ body {
 
 #leaveRoutine {
     font-size: 18pt;
-    padding: 16px;
+    padding: 10px;
     color: white;
     background-color: orange;
     border: 0;
     border-radius: 50px;
     /* bottom: 0; */
     margin: 16px;
+    position: absolute;
+}
+
+#playAudio {
+    font-size: 18pt;
+    padding: 10px;
+    color: white;
+    background-color: orange;
+    border: 0;
+    border-radius: 50px;
+    /* bottom: 0; */
+    margin: 16px;
+    /* position: absolute; */
 }
 
 .deleteRoutine {

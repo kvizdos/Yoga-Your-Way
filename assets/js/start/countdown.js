@@ -3,16 +3,25 @@ var CountdownClock = function() {
     this.isPaused = false,
     this.countdown,
     this.activeAudio,
-    this.togglePlay = (forcePause = false) => {        
+    this.togglePlay = (forcePause = false, isListen = false) => {        
         if(!this.isPaused || forcePause) { 
             $('#progress').removeClass("fas fa-pause-circle");
             $('#progress').addClass("fas fa-play-circle");
-            try { document.getElementById('audioSource').pause() } catch { console.error("Failed to pause audio!") }
+            console.log("yee: " + isListen);
+            if(isListen) $($('#playAudio')[0].children[0]).removeClass("fas fa-volume-up");
+            if(isListen) $($('#playAudio')[0].children[0]).addClass("fas fa-volume-mute");
+            console.log("Playing audio");
+            if(isListen) try { document.getElementById('audioSource').play() } catch { console.error("Failed to unpause audio!") }
+            if(!isListen) try { document.getElementById('audioSource').pause() } catch { console.error("Failed to pause audio!") }
         }
         if(this.isPaused) {
             $('#progress').removeClass("fas fa-play-circle");
             $('#progress').addClass("fas fa-pause-circle");
-            try { document.getElementById('audioSource').play() } catch { console.error("Failed to unpause audio!") }
+            if(isListen) $($('#playAudio')[0].children[0]).removeClass("fas fa-volume-mute");
+            if(isListen) $($('#playAudio')[0].children[0]).addClass("fas fa-volume-up");
+            console.log("Pausing audio");
+            if(isListen) try { document.getElementById('audioSource').pause() } catch { console.error("Failed to pause audio!") }
+            if(!isListen) try { document.getElementById('audioSource').pause() } catch { console.error("Failed to pause audio!") }
         }
         this.isPaused = !this.isPaused;
     },
@@ -42,10 +51,10 @@ var CountdownClock = function() {
             if(audioSource !== "./NO AUDIO") {
                 console.log("STARTING AUDIO: " + audioSource);
                 $('#audioSource').attr("src", audioSource);
-                document.getElementById('audioSource').play()
+                // document.getElementById('audioSource').play()
             } else {
                 $('#audioSource').attr("src", "");
-                document.getElementById('audioSource').play()
+                // document.getElementById('audioSource').play()
             }
 
             let currentlyAt = (timeInSeconds);

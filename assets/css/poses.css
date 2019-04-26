@@ -46,19 +46,13 @@
     max-height: 50vh;
 }
 
-#progress {
-    /* width: 20vh;
-    height: 20vh; */
-    /* background-color: red; */
-    /* border: 10px solid #F69F0C; */
-    /* border: 16px solid rgb(241, 185, 31);
-    border-top: 16px solid #F69F0C;
-    border-radius: 50%; */
+.circleBtn {
     color: #F69F0C;
     font-size: 8em;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 5px !important;
 }
 
 .progressInternals {
@@ -80,4 +74,8 @@
 
 .progressInternals {
     margin-top: 10px;
+}
+
+.waiting {
+    color: rgb(224, 127, 0) !important;
 }

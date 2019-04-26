@@ -8,11 +8,21 @@ var setCurrentRoutine = (routine) => {
 
 var StartPage = function() {
     this.parent = "",
+    this.isPlayingAudio = false;
     this.handleTaps = () => {
-        console.log("Handling tapperoos");
+        $('#playAudio').on('touchend', (e) => {
+            this.isPlayingAudio = !this.isPlayingAudio;
+            if(this.isPlayingAudio) {
+                $('#progress').addClass("waiting");
+                Countdown.togglePlay(true, true);
+            } else {
+                $('#progress').removeClass("waiting");
+                Countdown.togglePlay(false, true);
+            }
+        });
+
         $('#progress').on('touchend', (e) => {
-            console.log("TAPPPPED");
-            Countdown.togglePlay();
+            if(!this.isPlayingAudio) Countdown.togglePlay();
         })
 
         $('#leaveRoutine').on('touchend', (e) => {
@@ -24,16 +34,21 @@ var StartPage = function() {
         this.parent = parent;
         $(parent).append(`
             <div class="activePoseContainer">
+            <button id="leaveRoutine"><i class="fas fa-arrow-circle-left"></i></button>
                 <div class="activePose">
                     <img id="activePoseImg" src="" width="100%" />
                 </div>
 
                 <div class="activePoseInfo">
-                    <i id="progress" class="fas fa-pause-circle"></i>
+                    <i id="progress" class="circleBtn fas fa-pause-circle"></i>
+
                     <!--<div id="progress" class="shapeshifter play" style="background-image: url(./assets/images/playpause.svg)"></div>-->
 
                     <div id="audio">
                         <audio id="audioSource"></audio>
+                    </div>
+                    <div id="audio2">
+                        <audio id="dingSource" src="./assets/ding.mp3"></audio>
                     </div>
                 </div>
                 <div class="progressInternals">
@@ -42,7 +57,7 @@ var StartPage = function() {
                     <br>
                     <span class="nextPose">Up Next: <span id="nextPoseNote">X</span></span>
                     <br>
-                    <button id="leaveRoutine"><i class="fas fa-arrow-circle-left"></i> Stop</button>
+                    <button id="playAudio"><i class="fas fa-volume-up"></i> How to</button>
                 </div>
             </div>
         `);
@@ -61,6 +76,8 @@ var StartPage = function() {
                 poses = poses.slice(1);
                 if(poses.length > 0) {
                     return new Promise((r, j) => {
+                        document.getElementById('dingSource').currentTime = 0;
+                        document.getElementById('dingSource').play();
                         resolve(this.runCountdown(poses));
                     })
                 } else {

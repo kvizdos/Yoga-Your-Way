@@ -350,12 +350,7 @@ var CreatePage = function(RH, PH, rp = [], rname = "") {
         if(name == '') {alert("Please fill out all of the information."); return;}
 
         for(pose of this.registeredPoses) {
-            let inp = $('#' + pose.name.replace(/\ /g, "_").replace(/\-/g, "_").toLowerCase()).val();
-            if((parseInt(inp) < parseInt(pose.duration))) {
-                alert("Please make sure your times are over the minimum.");
-                return;
-            }
-
+            let inp = $('#' + pose.name.replace(/\ /g, "_").replace(/\-/g, "_").toLowerCase()).val()
             pose.duration = parseInt(inp);
         }
 
