@@ -170,11 +170,13 @@ var routineList = function(container, prev, current, next) {
     },
     this.toggleShowMore = (onoff) => {
         if(!onoff) {
+            $('#navbar').show(250);
             $('.routineShowMore')[0].style.opacity = 0;
             setTimeout(function() {
                 $('.routineShowMore')[0].style.display = 'none';
             }, 250)
         } else {
+            $('#navbar').hide(250);
             $('.routineShowMore')[0].style.display = 'block';
             setTimeout(function() {
                 $('.routineShowMore')[0].style.opacity = 1;
@@ -183,30 +185,6 @@ var routineList = function(container, prev, current, next) {
     
     },
     this.handleSwipes = () => {
-
-        // $('.changeRoutine').on('touchend', (e) => {
-        //     let cn = e.target.className.split(" ")[1];
-        //     console.log('clickee');
-        //     if(cn == "fa-chevron-right") {
-        //         console.log("GO RIGHTTT");
-        //         this.currentlyShowing += 1;
-        //         if(this.routines[this.currentlyShowing] !== undefined) {
-        //             this.render();
-        //         } else {
-        //             this.currentlyShowing -= 1;
-        //         }
-        //         $('.' + this.container + " img")[0].style.transform = `none`;
-        //     } else {
-        //         console.log("GO LEFFTT");
-        //         this.currentlyShowing -= 1;
-        //         if(this.routines[this.currentlyShowing] !== undefined) {
-        //             this.render();
-        //         } else {
-        //             this.currentlyShowing += 1;
-        //         }
-        //         $('.' + this.container + " img")[0].style.transform = `none`;
-        //     }
-        // })
         $('#showMoreInfo').on('touchend', (e) => {
             showMore = !showMore;
             this.toggleShowMore(showMore);

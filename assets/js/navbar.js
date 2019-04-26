@@ -35,6 +35,11 @@ const navigateTo = (page, extras = [], cb = () => {}, hideNavbar = false) => {
     cb(extras);
 }
 
+const toggleNavbar = (onoff = true) => {
+    if(onoff) $('#navbar').show();
+    if(!onoff) $('#navbar').hide();
+}
+
 
 var Page = function(name, icon, showOnBar, onrender) {
     this.name = name,
