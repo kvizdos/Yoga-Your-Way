@@ -16,7 +16,7 @@ var Navbar = function(active) {
             }
             this.pages[page].render();
         }
-   
+
         $('body').append(`
         <div id="navbar">
             ${navList}
@@ -43,7 +43,7 @@ var Page = function(name, icon, showOnBar, onrender) {
     this.selector = 'page-' + this.name.toLowerCase(),
     this.id = Math.floor(Math.random() * 50),
     this.render = () => { 
-        $('body').append('<div id="'+this.selector+'"></div>');
+        $('#pageHolder').append('<div id="'+this.selector+'"></div>');
         $("#" + this.selector).append(onrender("#" + this.selector));
     },
     this.show = () => {

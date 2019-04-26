@@ -1,11 +1,15 @@
 const newRoutine = new Routine('Set my name!', "Set my description!", [], 0, "");
 
-var CreatePage = function(RH, PH) {
+var CreatePage = function(RH, PH, rp = [], rname = "") {
     this.parent,
     this.RoutineHandler = RH,
     this.PoseHandler = PH,
     this.allPoses = [],
-    this.registeredPoses = [],
+    this.registeredPoses = rp,
+    this.routineName = rname,
+    console.log(rp);
+    this.isEditing = rp.length == 0 ? false : true,
+    console.warn("HERE: " + rp.length + " -- " + this.isEditing);
     this.render = (parent) => {
         this.parent = parent;
 
@@ -209,7 +213,10 @@ var CreatePage = function(RH, PH) {
         let routineNameInput = document.createElement('input');
         routineNameInput.name = "name";
         routineNameInput.id = "routineName";
-        routineNameInput.placeholder = "Routine Name";
+
+        console.log("IS EDITING: " + this.isEditing + " - rn: " + this.routineName);
+
+        routineNameInput.placeholder = this.isEditing ? this.routineName : "Routine Name";
 
         // let routineDescriptionInput = document.createElement('input');
         // routineDescriptionInput.name = "description";

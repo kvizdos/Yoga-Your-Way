@@ -197,3 +197,7 @@ body {
     /* bottom: 0; */
     margin: 16px;
 }
+
+.deleteRoutine {
+    background-color: #f6830c !important;
+}

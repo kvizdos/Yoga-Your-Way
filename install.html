@@ -20,5 +20,12 @@
             <p>1) Click on the banner that appears at the bottom that says "Add to homescreen"</p>
             <p>2) If that dialogue does not open, in Chrome, you can click the three dots at the top and click "Install Yoga Your Way"</p>
         </div>
+
+        <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+            navigator.serviceWorker.register('./sw.js');
+        });}
+        </script>
     </body>
 </html>

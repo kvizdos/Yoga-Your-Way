@@ -15,6 +15,8 @@ var routines = _RoutineHandler.getRoutines();
 var PoseImageLocation = "./assets/images/poses/";
 
 var Load = () => {
+    $('body').append('<div id="pageHolder"></div>');
+
     _PoseHandler.initialize();
     if(_SettingsHandler.getSetting('voice') == "") _SettingsHandler.setup();
 

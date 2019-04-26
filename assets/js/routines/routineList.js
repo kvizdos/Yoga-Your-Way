@@ -25,6 +25,13 @@ var routineList = function(container, prev, current, next) {
         this.routines.push(routine) 
         localStorage.setItem('routines', JSON.stringify(this.routines));
     },
+    this.deleteRoutine = (routine) => {
+        this.routines = this.routines.filter((r) => {
+            return r.name !== routine.name && r.poses !== routine.poses;
+        });
+        
+        localStorage.setItem('routines', JSON.stringify(this.routines));
+    },
     this.render = () => {
         
         let pagination = "";
@@ -46,7 +53,7 @@ var routineList = function(container, prev, current, next) {
             `
         }
 
-        PL += "<button id='playRoutine'>Start</button><br><!--<button id='editRoutine'>Edit Routine</button>-->"
+        PL += "<button id='playRoutine'>Start</button><br><button class='deleteRoutine delete-"+this.routines[this.currentlyShowing].name.replace(/\ /g, '-').replace(/-/g, '-').toLowerCase()+"'>Delete Routine</button>"
 
 
         if($('.' + this.container).children().length == 0) {
@@ -102,6 +109,23 @@ var routineList = function(container, prev, current, next) {
                 editRoutine(this.routines[this.currentlyShowing].name, this.getRoutines(), e)
             })
 
+            $('.deleteRoutine').on('touchend', (e) => {
+                var conf = confirm("Are you sure you would like to delete this routine?");
+                if(conf) {
+                    let routine = this.getRoutines().filter((r) => {
+                        return r.name.replace(/\ /, '-').toLowerCase() == e.target.className.substring("deleteRoutine ".length + 7);
+                    })[0]
+                    
+                    if(this.routines.length > 1) {
+                        this.deleteRoutine(routine);
+                        window.location = window.location;
+                    } else {
+                        alert("You must have more than 1 routine to delete a routine");
+                    }
+                }
+            })
+
+
         } else {
             $('.routineHeader').text(this.routines[this.currentlyShowing].name)
             $('.routineDesc').text(this.routines[this.currentlyShowing].name)
@@ -122,6 +146,25 @@ var routineList = function(container, prev, current, next) {
             $('#editRoutine').on('touchend', (e) => {
                 editRoutine(this.routines[this.currentlyShowing].name, this.getRoutines(), e)
             })
+            
+
+            $('.deleteRoutine').on('touchend', (e) => {
+                console.log("TRYNA DELETE");
+                var conf = confirm("Are you sure you would like to delete this routine?");
+                if(conf) {
+                    let routine = this.getRoutines().filter((r) => {
+                        return r.name.replace(/\ /, '-').toLowerCase() == e.target.className.substring("deleteRoutine ".length + 7);
+                    })[0]
+                    
+                    if(this.routines.length > 1) {
+                        this.deleteRoutine(routine);
+                        window.location = window.location;
+                    } else {
+                        alert("You must have more than 1 routine to delete a routine");
+                    }
+                }
+            })
+
         }
         
     },
@@ -164,7 +207,6 @@ var routineList = function(container, prev, current, next) {
         //         $('.' + this.container + " img")[0].style.transform = `none`;
         //     }
         // })
-
         $('#showMoreInfo').on('touchend', (e) => {
             showMore = !showMore;
             this.toggleShowMore(showMore);

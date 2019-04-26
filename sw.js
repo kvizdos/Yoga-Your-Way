@@ -42,14 +42,11 @@ function createCacheBustedRequest(url) {
     console.warn('Attempting to install service worker and cache static assets')
 
     event.waitUntil(
-      // fetch(createCacheBustedRequest(OFFLINE_URL)).then(function(response) {
-      //   return caches.open(CURRENT_CACHES.offline).then(function(cache) {
-      //     return cache.put(OFFLINE_URL, response);
-      //   });
-      // }),
-      caches.open('pages-cache-v1').then(cache => {
-        return cache.addAll(filesToCache);
-      })
+      fetch(createCacheBustedRequest(OFFLINE_URL)).then(function(response) {
+        return caches.open(CURRENT_CACHES.offline).then(function(cache) {
+          return cache.put(OFFLINE_URL, response);
+        });
+      }),
     );
   });
   
