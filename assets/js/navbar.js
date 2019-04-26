@@ -27,9 +27,16 @@ var Navbar = function(active) {
     }
 }
 
-const navigateTo = (page, extras = [], cb = () => {}, hideNavbar = false) => {
+const navigateTo = (page, extras = [], cb = () => {}, hideNavbar = false, el = "NO") => {
     if(hideNavbar) $('#navbar').hide();
     if(!hideNavbar) $('#navbar').show();
+
+    $('.activeNavbar').removeClass('.activeNavbar');
+    if(el !== "NO") {
+        console.log(el);
+        $(el).addClass('activeNavbar');
+    }
+
     $('[id^="page-"]').hide();
     $('#' + page).show();
     cb(extras);

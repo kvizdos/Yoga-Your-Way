@@ -17,3 +17,9 @@
     margin-left: 12.5vw;
     margin-right: 12.5vw;
 }
+
+.navbarActive {
+    background-color: red;
+    padding: 8px;
+    border-radius: 50px;
+}
