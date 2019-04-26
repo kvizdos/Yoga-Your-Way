@@ -77,7 +77,7 @@ var routineList = function(container, prev, current, next) {
                     </div>
                     <div class="routineDescription">
                         <div class="routineSplitRow">
-                            <div class="routineSplit">
+                            <div class="routineSplit" id="poseCounter">
                                 <i class="fas fa-list"></i><br>
                                 <span class="routinePoseCount">${this.routines[this.currentlyShowing].poses !== undefined ? this.routines[this.currentlyShowing].poses.length : 0 } poses</span>
                             </div>
@@ -214,6 +214,30 @@ var routineList = function(container, prev, current, next) {
             if(showMore) $('#showMoreInfo')[0].style.transform = "rotate(180deg)";
             if(!showMore) $('#showMoreInfo')[0].style.transform = "rotate(0deg)";
 
+        })
+
+        $('.routineSplit').on('touchend', (e) => {
+            showMore = !showMore;
+            this.toggleShowMore(showMore);
+
+            if(showMore) $('#showMoreInfo')[0].style.transform = "rotate(180deg)";
+            if(!showMore) $('#showMoreInfo')[0].style.transform = "rotate(0deg)";
+
+            let h = document.getElementsByClassName('routineSwiper')[0].children[0].clientHeight + document.getElementsByClassName('routineSwiper')[0].children[1].clientHeight;
+
+            console.log("SHOW MORE: " + showMore);
+
+            if(showMore) {
+                isActive = true;
+                $('.routineSwiper')[0].style.bottom = `calc(100vh - ${h}px)`;
+                $('#showMoreInfo')[0].style.transform = "rotate(180deg)";
+                this.toggleShowMore(true);
+            } else if(!showMore) {
+                $('.routineSwiper')[0].style.bottom = `0`;
+
+                $('#showMoreInfo')[0].style.transform = "rotate(0deg)";
+                this.toggleShowMore(false);
+            }
         })
 
         Hammer(document.getElementsByClassName('routineContainer')[0].children[0].children[0]).on('panright', (e) => {
