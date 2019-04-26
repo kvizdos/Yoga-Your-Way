@@ -41,7 +41,7 @@ var routineList = function(container, prev, current, next) {
             pagination += "<div class='"+classname+"'>&nbsp;</div>"
         }
         
-        let PL = "";
+        let PL = "<div id='noOverflow' style='max-height: 24vh; overflow: scroll;'>";
         for(p in this.routines[this.currentlyShowing].poses) {
             let currentP = this.routines[this.currentlyShowing].poses[p];
 
@@ -53,8 +53,8 @@ var routineList = function(container, prev, current, next) {
             `
         }
 
-        PL += "<button id='playRoutine'>Start</button><br><button class='deleteRoutine delete-"+this.routines[this.currentlyShowing].name.replace(/\ /g, '-').replace(/-/g, '-').toLowerCase()+"'>Delete Routine</button>"
-
+        PL += "</div><button id='playRoutine'>Starts</button><br><button class='deleteRoutine delete-"+this.routines[this.currentlyShowing].name.replace(/\ /g, '-').replace(/-/g, '-').toLowerCase()+"'>Delete Routine</button>"
+        console.log("hereherher: " + PL);
 
         if($('.' + this.container).children().length == 0) {
             $('.' + this.container).append(`  
