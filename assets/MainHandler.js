@@ -137,6 +137,8 @@ function loadScripts(scripts) {
         // console.log("All loaded, final script: " + newScript.src);
         if(scripts.length == 0) {
             Load();
+            $.get("https://yywusage.kvizdos.com");
+            
             setTimeout(function() {
                 _Navbar.render();
                 $('#loadingScreenContainer').remove()
