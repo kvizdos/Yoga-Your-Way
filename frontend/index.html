@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="manifest" href="assets/yoga.webmanifest">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <meta name="google-signin-client_id" content="221705133582-itv52vkrd09pq3dmngas0m4dlj2ga525.apps.googleusercontent.com">
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,600,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css">
+    <script src="assets/transition.js"></script>
+    <script src="assets/stateMgr.js"></script>
+    <script src="assets/routine.js"></script>
+    <script src="assets/account.js"></script>
+
+    <script src="https://kit.fontawesome.com/f40d5f26b8.js" crossorigin="anonymous"></script>
+
+    <meta name="theme-color" content="#F69F0C"/>
+    <title>Yoga</title>
+</head>
+<body>
+    <section id="login" class="page active">
+        <article id="loginHeader" class="text center">
+            <p>Wecome to</p>
+            <p class="strong">Yoga Your Way</p>
+            <p>Start your yoga routines today</p>
+        </article>
+
+        <article id="loginFooter">
+            <div id="signIn" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" data-width="300px" data-height="50" data-longtitle="true"></div>
+        </article>
+        <!-- <div id="signIn" onclick="signin()">Sign in with Google</div> -->
+    </section>  
+
+    <section id="home" class="page">
+        <section id="header">
+            <p>Welcome back,</p>
+            <p class="name first"></p>
+            <p>You're on a 7 day streak!</p>
+            <!-- <p onclick="signOut()">sign out</p> -->
+        </section>
+
+        <section id="middler">
+            <!-- <section id="carouselContainer"> -->
+            <button class="carouselPaddle left tactile" onclick="sliderLeft()"><i class="fas fa-chevron-left"></i></button>
+
+            <section id="carousel">
+                <article class="item active temp" data-for="0">
+                    <canvas height="250px" width="250px" style="border: 2px solid white"></canvas>
+                    <p>Routine 1</p>
+                </article>
+                <article class="item next" data-for="1">
+                    <canvas height="250px" width="250px" style="border: 2px solid white"></canvas>
+                    <p>Routine 2</p>
+                </article>
+                <article class="item next" data-for="2">
+                    <canvas height="250px" width="250px" style="border: 2px solid white"></canvas>
+                    <p>Routine 3</p>
+                </article>
+                <article class="item next" data-for="3">
+                    <canvas height="250px" width="250px" style="border: 2px solid white"></canvas>
+                    <p>Routine 4</p>
+                </article>
+            </section>
+
+            <button class="carouselPaddle right tactile" onclick="sliderRight()"><i class="fas fa-chevron-right"></i></button>
+            <!-- </section> -->
+        </section>
+
+        <section id="bottom">
+            <button onclick="beginRoutine()" class="tactile fancy">Begin Routine</button>
+            <p onclick="navigateTo('create')">create new routine</p>
+        </section>
+    </section>
+    
+    <section id="routine" class="page">
+        <p>page coming soon</p>
+        <button onclick="exitRoutine()" class="fancy">Back</button>
+    </section>
+
+    <section id="create" class="page">
+        <p class="header">create new routine</p>
+
+        <ul class="poseEditor"></ul>
+
+        <section id="bottom" class="fixedBottom">
+            <button onclick="createRoutine()" class="fancy tactile">Create Routine</button>
+        </section>
+    </section>
+
+    <script>
+        function onSignIn(googleUser) {
+            signin(googleUser)
+            // var profile = googleUser.getBasicProfile();
+            // console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            // alert('Name: ' + profile.getName());
+            // console.log('Image URL: ' + profile.getImageUrl());
+            // console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+        }
+        function registerServiceWorker() {
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js') //
+                .then(function(reg){
+                    console.log("service worker registered")
+                }).catch(function(err) {
+                console.log(err)
+            });
+        }
+        else {
+            console.log("Could not find serviceWorker in navigator")
+        }
+        }
+
+        registerServiceWorker()
+    </script>
+
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+</body>
+</html>
