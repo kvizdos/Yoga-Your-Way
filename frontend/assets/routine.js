@@ -59,35 +59,53 @@ const createRoutine = () => {
 }
 
 const sliderLeft = () => {
-    if(document.querySelectorAll('#carousel .item.prev').length > 0) {
-        document.querySelector('#carousel .item.active').classList.add('next')
-        document.querySelector('#carousel .item.active').classList.remove('active')
-        document.querySelectorAll('#carousel .item.prev')[document.querySelectorAll('#carousel .item.prev').length - 1].classList.add('active');
+    const previousCarouselItems = document.querySelectorAll('#carousel .item.prev');
+    const paddleLeft = document.querySelector('.carouselPaddle.left');
+    const paddleRight = document.querySelector('.carouselPaddle.right');
 
-        document.querySelectorAll('#carousel .item.prev')[document.querySelectorAll('#carousel .item.prev').length - 1].classList.remove('prev');
+    if(previousCarouselItems.length > 0) {
+        const activeCarouselItem = document.querySelector('#carousel .item.active');
+        activeCarouselItem.classList.add('next')
+        activeCarouselItem.classList.remove('active')
+        
+        previousCarouselItems[previousCarouselItems.length - 1].classList.add('active');
+        previousCarouselItems[previousCarouselItems.length - 1].classList.remove('prev');
     
-        if(document.querySelectorAll('#carousel .item.prev').length == 0) {
-            document.querySelector('.carouselPaddle.left').disabled = true
+        if(previousCarouselItems.length == 0) {
+            paddleLeft.disabled = true
         } 
-        if(document.querySelectorAll('#carousel .item.next').length > 0) {
-            document.querySelector('.carouselPaddle.right').disabled = false
+
+        const nextCarouselItems = document.querySelectorAll('#carousel .item.next');
+
+        if(nextCarouselItems.length > 0) {
+            paddleRight.disabled = false
         }
     }
 }
 
 const sliderRight = () => {
-    if(document.querySelectorAll('#carousel .item.next').length > 0) {
-        document.querySelector('#carousel .item.active').classList.add('prev')
-        document.querySelector('#carousel .item.active').classList.remove('active')
-        
-        document.querySelectorAll('#carousel .item.next')[0].classList.add('active');
-        document.querySelectorAll('#carousel .item.next')[0].classList.remove('next');
+    const nextCarouselItems = document.querySelectorAll('#carousel .item.next');
+    const paddleLeft = document.querySelector('.carouselPaddle.left');
+    const paddleRight = document.querySelector('.carouselPaddle.right');
 
-        if(document.querySelectorAll('#carousel .item.next').length == 0) {
-            document.querySelector('.carouselPaddle.right').disabled = true
+    if(nextCarouselItems.length > 0) {
+        const activeCarouselItem = document.querySelector('#carousel .item.active');
+        const nextCarouselItems = document.querySelectorAll('#carousel .item.next');
+
+        activeCarouselItem.classList.add('prev')
+        activeCarouselItem.classList.remove('active')
+        
+        nextCarouselItems[0].classList.add('active');
+        nextCarouselItems[0].classList.remove('next');
+
+        if(nextCarouselItems.length == 0) {
+            paddleRight.disabled = true
         } 
-        if(document.querySelectorAll('#carousel .item.prev').length > 0) {
-            document.querySelector('.carouselPaddle.left').disabled = false
+
+        const previousCarouselItems = document.querySelectorAll('#carousel .item.prev');
+
+        if(previousCarouselItems.length > 0) {
+            paddleLeft.disabled = false
         }
     }
 }
