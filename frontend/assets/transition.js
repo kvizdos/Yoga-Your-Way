@@ -39,25 +39,12 @@ const swipeIndividual = (els, duration = 100, direction = 'left', i = 1, allEls 
     el.style.visibility = 'inherit'
     el.style.opacity = 0;
 
-    // if(i == 1) {
-    //     allEls = els;
-    //     for(el2 of allEls) {
-    //             console.log("Resetting")
-    //             el2.style.transition = "0s";
-    //             el2.style.transform = 'inherit';
-    //             el2.style.opacity = 'inherit';
-    //         }
-    // }
-
     setTimeout(function() {
         el.style.transition = .45 / i + "s";
         el.style.transform = '';
         el.style.opacity = 1;
         if(els.length > 0) {
             swipeIndividual(els, duration, direction, i++, allEls)
-        } else {
-            console.log("In hererer")
-            
         }
     }, duration / i);
 }
